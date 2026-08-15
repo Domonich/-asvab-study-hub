@@ -150,6 +150,20 @@ body.dark .study-section-block h4 { color: var(--orange-light); }
 .review-item:last-child { border-bottom: none; }
 .review-item .your-answer { color: var(--red); }
 .review-item .correct-answer { color: var(--green); }
+.review-item .reveal-tag { color: var(--teal); font-weight: 600; }
+.review-item .guess-tag { color: var(--amber); font-weight: 600; }
+
+/* not-sure walkthrough + confidence rating */
+.reveal-link { background: none; border: none; color: var(--teal); font-size: 0.82rem; font-weight: 600; cursor: pointer; padding: 8px 0; text-decoration: underline; }
+.reveal-link:hover { opacity: 0.8; }
+.option.revealed-correct { border-color: var(--teal); background: var(--teal-bg); color: var(--teal); }
+.feedback-box.reveal { background: var(--teal-bg); color: var(--teal); }
+.confidence-row { margin-top: 14px; }
+.confidence-row .label { font-size: 0.78rem; color: var(--text-light); margin-bottom: 6px; }
+.confidence-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.confidence-btn { padding: 7px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer; font-size: 0.8rem; font-weight: 600; }
+.confidence-btn:hover { border-color: var(--orange); }
+.confidence-btn.selected { border-color: var(--orange); background: var(--orange); color: #fff; }
 
 /* progress */
 .trend-up { color: var(--green); }
@@ -984,6 +998,8 @@ function renderStudyDomain(key) {
 
 let practiceQuiz = [];
 let practiceAnswers = [];
+let practiceRevealed = []; // true if the user asked to see the walkthrough instead of guessing
+let practiceConfidence = []; // 'confident' | 'unsure' | 'guess' | null, set after answering
 let practiceIndex = 0;
 let practiceSetupDomain = null;
 
@@ -1043,7 +1059,7 @@ function renderPracticeSetup(preselect) {
 
   document.getElementById('practiceContent').innerHTML = `
     <div class="card">
-      <p>Practice quizzes give you <strong>instant feedback</strong> after each question — right answer, wrong answer, and why — so you can drill a weak subtest until it sticks. Pick a subtest below.</p>
+      <p>Practice quizzes give you <strong>instant feedback</strong> after each question — right answer, wrong answer, and why. If you don't know a question at all, use <strong>"Not sure? Walk me through it"</strong> instead of guessing — it shows the full solution and doesn't count against your score, so you actually learn the concept instead of reinforcing a lucky or unlucky guess. After each answer you also rate your <strong>confidence</strong> — getting something right while marked "Guessed" still shows up in your review, because a right answer you weren't sure of is still a gap worth closing. Pick a subtest below.</p>
     </div>
     <div class="study-group-title">🎖️ Priority for Your OCS Goal (GT)</div>
     <div class="domain-grid">${mixedCardHtml}${gtDomains.map(cardHtml).join('')}</div>
@@ -1061,6 +1077,8 @@ function selectPracticeDomain(key) {
 function startPractice(domainKey, count) {
   practiceQuiz = shuffle(getDomainPool(domainKey)).slice(0, count);
   practiceAnswers = new Array(practiceQuiz.length).fill(-1);
+  practiceRevealed = new Array(practiceQuiz.length).fill(false);
+  practiceConfidence = new Array(practiceQuiz.length).fill(null);
   practiceIndex = 0;
   document.getElementById('practiceBackBtn').classList.remove('hidden');
   const label = domainKey === 'GT-MIXED' ? 'GT Mixed Practice' : SECTIONS.find(s => s.key === domainKey).name;
@@ -1071,19 +1089,46 @@ function startPractice(domainKey, count) {
 function renderPracticeQuestion() {
   const item = practiceQuiz[practiceIndex];
   const answered = practiceAnswers[practiceIndex] !== -1;
+  const revealed = practiceRevealed[practiceIndex];
+  const settled = answered || revealed; // question is "done" one way or another
   const secMeta = SECTIONS.find(s => s.key === item.sectionKey);
+
   const optsHtml = item.o.map((opt, i) => {
     let cls = 'option';
     if (answered) {
       if (i === item.a) cls += ' correct';
       else if (i === practiceAnswers[practiceIndex]) cls += ' incorrect';
+    } else if (revealed && i === item.a) {
+      cls += ' revealed-correct';
     }
-    return `<button class="${cls}" ${answered ? 'disabled' : ''} onclick="selectPracticeOption(${i})">${opt}</button>`;
+    return `<button class="${cls}" ${settled ? 'disabled' : ''} onclick="selectPracticeOption(${i})">${opt}</button>`;
   }).join('');
-  const feedback = answered ? `
-    <div class="feedback-box ${practiceAnswers[practiceIndex] === item.a ? 'correct' : 'incorrect'}">
-      ${practiceAnswers[practiceIndex] === item.a ? '✓ Correct.' : '✗ Not quite.'} ${item.e}
+
+  const revealLink = !settled ? `<button class="reveal-link" onclick="revealPracticeAnswer()">🤔 Not sure? Walk me through it →</button>` : '';
+
+  let feedback = '';
+  if (answered) {
+    feedback = `
+      <div class="feedback-box ${practiceAnswers[practiceIndex] === item.a ? 'correct' : 'incorrect'}">
+        ${practiceAnswers[practiceIndex] === item.a ? '✓ Correct.' : '✗ Not quite.'} ${item.e}
+      </div>`;
+  } else if (revealed) {
+    feedback = `
+      <div class="feedback-box reveal">
+        📘 Here's how to solve it (no guess recorded — this won't count against your score): ${item.e}
+      </div>`;
+  }
+
+  const confidenceRow = answered ? `
+    <div class="confidence-row">
+      <div class="label">How confident were you in that answer?</div>
+      <div class="confidence-btns">
+        <button class="confidence-btn ${practiceConfidence[practiceIndex] === 'confident' ? 'selected' : ''}" onclick="setPracticeConfidence('confident')">😎 Confident</button>
+        <button class="confidence-btn ${practiceConfidence[practiceIndex] === 'unsure' ? 'selected' : ''}" onclick="setPracticeConfidence('unsure')">🤔 Somewhat sure</button>
+        <button class="confidence-btn ${practiceConfidence[practiceIndex] === 'guess' ? 'selected' : ''}" onclick="setPracticeConfidence('guess')">🎲 Guessed</button>
+      </div>
     </div>` : '';
+
   document.getElementById('practiceContent').innerHTML = `
     <div class="card">
       <div class="progress-wrap"><div class="progress-bar" style="width:${(practiceIndex / practiceQuiz.length) * 100}%"></div></div>
@@ -1091,17 +1136,30 @@ function renderPracticeQuestion() {
       ${item.passage ? `<div class="q-passage">${item.passage}</div>` : ''}
       <div class="q-text">${item.q}</div>
       <div>${optsHtml}</div>
+      ${revealLink}
       ${feedback}
+      ${confidenceRow}
       <div class="quiz-nav" style="justify-content:flex-end;">
-        <button class="btn btn-primary" ${answered ? '' : 'disabled'} onclick="nextPracticeQuestion()">${practiceIndex === practiceQuiz.length - 1 ? 'Finish →' : 'Next →'}</button>
+        <button class="btn btn-primary" ${settled ? '' : 'disabled'} onclick="nextPracticeQuestion()">${practiceIndex === practiceQuiz.length - 1 ? 'Finish →' : 'Next →'}</button>
       </div>
     </div>
   `;
 }
 
 function selectPracticeOption(i) {
-  if (practiceAnswers[practiceIndex] !== -1) return;
+  if (practiceAnswers[practiceIndex] !== -1 || practiceRevealed[practiceIndex]) return;
   practiceAnswers[practiceIndex] = i;
+  renderPracticeQuestion();
+}
+
+function revealPracticeAnswer() {
+  if (practiceAnswers[practiceIndex] !== -1 || practiceRevealed[practiceIndex]) return;
+  practiceRevealed[practiceIndex] = true;
+  renderPracticeQuestion();
+}
+
+function setPracticeConfidence(level) {
+  practiceConfidence[practiceIndex] = level;
   renderPracticeQuestion();
 }
 
@@ -1115,37 +1173,64 @@ function nextPracticeQuestion() {
 }
 
 function finishPractice() {
-  // Record one history entry per domain represented in this set (handles GT Mixed spanning 3 domains).
+  // "Revealed" questions (walkthrough used instead of guessing) are excluded entirely from scoring —
+  // they were a deliberate choice to learn, not an attempt, so they shouldn't help or hurt the score.
+  const attemptedIdx = practiceQuiz.map((_, i) => i).filter(i => practiceAnswers[i] !== -1);
+  const revealedIdx = practiceQuiz.map((_, i) => i).filter(i => practiceRevealed[i]);
+
   const byDomain = {};
-  practiceQuiz.forEach((item, i) => {
+  attemptedIdx.forEach(i => {
+    const item = practiceQuiz[i];
     if (!byDomain[item.sectionKey]) byDomain[item.sectionKey] = { correct: 0, total: 0 };
     byDomain[item.sectionKey].total++;
     if (practiceAnswers[i] === item.a) byDomain[item.sectionKey].correct++;
   });
   Object.entries(byDomain).forEach(([key, s]) => recordAttempt(key, s.correct, s.total, 'practice'));
 
-  const totalCorrect = practiceQuiz.reduce((sum, item, i) => sum + (practiceAnswers[i] === item.a ? 1 : 0), 0);
-  const pct = Math.round((totalCorrect / practiceQuiz.length) * 100);
-  const missed = practiceQuiz.map((item, i) => ({ item, i })).filter(x => practiceAnswers[x.i] !== x.item.a);
+  const totalCorrect = attemptedIdx.filter(i => practiceAnswers[i] === practiceQuiz[i].a).length;
+  const pct = attemptedIdx.length ? Math.round((totalCorrect / attemptedIdx.length) * 100) : 0;
+
+  // Review list: anything missed, anything revealed via walkthrough, or anything correct but guessed —
+  // all three mean the concept isn't solid yet, which is the point of this review.
+  const missedIdx = attemptedIdx.filter(i => practiceAnswers[i] !== practiceQuiz[i].a);
+  const guessedCorrectIdx = attemptedIdx.filter(i => practiceAnswers[i] === practiceQuiz[i].a && practiceConfidence[i] === 'guess');
+  const reviewIdx = [...new Set([...missedIdx, ...revealedIdx, ...guessedCorrectIdx])].sort((a, b) => a - b);
+
+  const reviewRow = i => {
+    const item = practiceQuiz[i];
+    let tagHtml = '';
+    let answerRow = '';
+    if (revealedIdx.includes(i)) {
+      tagHtml = '<span class="reveal-tag">📘 Walkthrough used</span>';
+    } else if (missedIdx.includes(i)) {
+      tagHtml = '<span class="your-answer">✗ Missed</span>';
+      answerRow = `<div class="your-answer">Your answer: ${item.o[practiceAnswers[i]]}</div>`;
+    } else {
+      tagHtml = '<span class="guess-tag">🎲 Correct, but you guessed</span>';
+      answerRow = `<div class="your-answer">Your answer: ${item.o[practiceAnswers[i]]}</div>`;
+    }
+    return `
+      <div class="review-item">
+        <div style="margin-bottom:4px;">${tagHtml}</div>
+        <div style="font-weight:600;margin-bottom:4px;">${item.q}</div>
+        ${item.passage ? `<div class="q-passage" style="margin-bottom:8px;">${item.passage}</div>` : ''}
+        ${answerRow}
+        <div class="correct-answer">Correct answer: ${item.o[item.a]}</div>
+        <div style="margin-top:4px;color:var(--text-light);">${item.e}</div>
+      </div>`;
+  };
 
   document.getElementById('practiceContent').innerHTML = `
     <div class="card score-hero">
       <div class="num">${pct}%</div>
-      <div class="label">${totalCorrect} of ${practiceQuiz.length} correct</div>
+      <div class="label">${totalCorrect} of ${attemptedIdx.length} attempted correct${revealedIdx.length ? ` · ${revealedIdx.length} reviewed via walkthrough (not scored)` : ''}</div>
     </div>
-    ${missed.length ? `
+    ${reviewIdx.length ? `
       <div class="card">
-        <h3>Review Missed Questions (${missed.length})</h3>
-        ${missed.map(x => `
-          <div class="review-item">
-            <div style="font-weight:600;margin-bottom:4px;">${x.item.q}</div>
-            ${x.item.passage ? `<div class="q-passage" style="margin-bottom:8px;">${x.item.passage}</div>` : ''}
-            <div class="your-answer">Your answer: ${x.item.o[practiceAnswers[x.i]]}</div>
-            <div class="correct-answer">Correct answer: ${x.item.o[x.item.a]}</div>
-            <div style="margin-top:4px;color:var(--text-light);">${x.item.e}</div>
-          </div>
-        `).join('')}
-      </div>` : `<div class="card"><p>Perfect set — no missed questions.</p></div>`}
+        <h3>Review (${reviewIdx.length})</h3>
+        <p style="font-size:0.78rem;color:var(--text-light);margin-bottom:8px;">Missed questions, questions you used the walkthrough on, and questions you got right but marked as a guess — these are the concepts worth re-studying.</p>
+        ${reviewIdx.map(reviewRow).join('')}
+      </div>` : `<div class="card"><p>Clean set — nothing missed, guessed, or revealed.</p></div>`}
     <div class="card" style="text-align:center;">
       <button class="btn btn-primary" onclick="renderPracticeSetup()">Practice Again →</button>
       <button class="btn btn-outline" style="margin-left:10px;" onclick="show('progress'); renderProgress();">View Progress →</button>
