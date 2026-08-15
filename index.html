@@ -358,6 +358,7 @@ const SECTIONS = [
         ]},
         {h:'Core Skills Refresher', body:'These four skills underpin almost every AR question.', items:[
           'Percentages: "X% of Y" = (X/100) × Y. To find a percent increase/decrease, calculate the change, then divide by the original amount.',
+          'Mental-math shortcut for "X% of Y" — find 10% first (just move the decimal point one place left), then scale it: 10% of 3,600 = 360, so 40% = 360 × 4 = 1,440. For odd percentages, combine chunks: 10% of 2,400 = 240, and 5% is half of that = 120, so 15% = 240 + 120 = 360. This turns almost any "X% of Y" question into simple addition/multiplication of 10% chunks — no long multiplication needed.',
           'Fractions ↔ Decimals ↔ Percent: 1/4 = 0.25 = 25%. 3/4 = 0.75 = 75%. Practice converting quickly in your head.',
           'Ratios & proportions: a ratio like "3 officers per 25 enlisted" scales — multiply both sides by the same factor to scale up.',
           'Averages: sum of all values ÷ number of values. If you know the average and count, you can find the total (average × count).'
@@ -409,7 +410,27 @@ const SECTIONS = [
       {q:'A unit\'s readiness score increased from 72 to 90. What was the percent increase?', o:['18%','20%','25%','30%'], a:2, e:'Change = 90 − 72 = 18. Percent increase = 18 ÷ 72 = 0.25 = 25%.'},
       {q:'A tank travels 8 miles in 15 minutes at a constant speed. At this rate, how far will it travel in 2 hours?', o:['56 miles','60 miles','64 miles','68 miles'], a:2, e:'Rate = 8 miles ÷ 15 min = 32 mph (since 15 min = 1/4 hour, 8 ÷ 1/4 = 32). In 2 hours: 32 × 2 = 64 miles.'},
       {q:'A company has a ratio of 2 sergeants for every 15 privates. If the company has 34 sergeants, how many privates are there?', o:['225','240','255','270'], a:2, e:'34 sergeants ÷ 2 = 17 groups of the ratio. 17 × 15 privates = 255 privates.'},
-      {q:'A recruit needs an overall average of at least 80 across 5 events to pass. Scores on the first four events are 75, 82, 88, and 79. What is the minimum score needed on the 5th event to reach an average of exactly 80?', o:['70','74','76','80'], a:2, e:'Total needed for an 80 average over 5 events = 400. Sum of first four = 75+82+88+79 = 324. 400 − 324 = 76.'}
+      {q:'A recruit needs an overall average of at least 80 across 5 events to pass. Scores on the first four events are 75, 82, 88, and 79. What is the minimum score needed on the 5th event to reach an average of exactly 80?', o:['70','74','76','80'], a:2, e:'Total needed for an 80 average over 5 events = 400. Sum of first four = 75+82+88+79 = 324. 400 − 324 = 76.'},
+      {q:'A brigade has 2,800 soldiers, and 35% are combat arms. How many soldiers are in combat arms?', o:['880','930','980','1,020'], a:2, e:'10% of 2,800 = 280. 35% = 3.5 × 280 = 980.'},
+      {q:'Of a company\'s 150 vehicles, 12% are currently down for maintenance. How many vehicles are down?', o:['15','16','18','20'], a:2, e:'10% of 150 = 15. 12% = 15 + (2% of 150 = 3) = 18.'},
+      {q:'A recruiter\'s list has 320 applicants, and 65% pass the initial physical screening. How many applicants pass?', o:['192','200','208','216'], a:2, e:'10% of 320 = 32. 65% = 32 × 6.5 = 208.'},
+      {q:'An armory holds 1,250 rifles, and 8% are due for scheduled maintenance this month. How many rifles need maintenance?', o:['90','95','100','110'], a:2, e:'10% of 1,250 = 125. 8% = 125 × 0.8 = 100.'},
+      {q:'Out of 500 recruits in a training cycle, 22% are assigned to a support MOS. How many recruits get a support MOS?', o:['100','105','110','115'], a:2, e:'10% of 500 = 50. 22% = 50 × 2.2 = 110.'},
+      {q:'A unit\'s equipment readiness report shows 92% of 225 vehicles are mission-capable. How many vehicles are mission-capable?', o:['198','203','207','212'], a:2, e:'10% of 225 = 22.5. 92% = 225 − (8% of 225 = 18) = 207.'},
+      {q:'A base commissary had 2,000 customers last month, and 18% used the self-checkout lanes. How many customers used self-checkout?', o:['340','350','360','380'], a:2, e:'10% of 2,000 = 200. 18% = 200 × 1.8 = 360.'},
+      {q:'Of 750 applicants who took the ASVAB last quarter, 42% scored high enough for their first-choice MOS. How many applicants qualified for their first choice?', o:['300','305','315','325'], a:2, e:'10% of 750 = 75. 42% = 75 × 4.2 = 315.'},
+      {q:'A supply depot has 3,200 items in stock, and 6% are flagged as excess. How many items are flagged as excess?', o:['180','186','192','198'], a:2, e:'10% of 3,200 = 320. 6% = 320 × 0.6 = 192.'},
+      {q:'A squadron of 96 personnel reports 25% currently on leave. How many personnel are on leave?', o:['20','22','24','28'], a:2, e:'25% = 1/4. 96 ÷ 4 = 24.'},
+      {q:'A vehicle depreciates 15% in its first year. If it\'s worth $17,000 at the end of year one, what was its original price?', o:['$19,000','$19,500','$20,000','$20,500'], a:2, e:'If original × 0.85 = 17,000, then original = 17,000 ÷ 0.85 = $20,000.'},
+      {q:'A fitness score dropped 10% from last quarter\'s 220. What is the new score?', o:['190','195','198','200'], a:2, e:'220 × 0.90 = 198.'},
+      {q:'A recruit\'s rucksack march pace is 4 miles per hour. How many minutes will it take to cover 6 miles at that pace?', o:['75','80','90','96'], a:2, e:'Time = 6 ÷ 4 = 1.5 hours = 90 minutes.'},
+      {q:'An obstacle course is 450 yards long. How many feet is that (3 feet = 1 yard)?', o:['1,200','1,250','1,350','1,400'], a:2, e:'450 × 3 = 1,350 feet.'},
+      {q:'A unit\'s total strength is 640, split into two companies in a ratio of 3:5. How many are in the smaller company?', o:['200','220','240','260'], a:2, e:'Total parts = 3 + 5 = 8. Each part = 640 ÷ 8 = 80. Smaller company = 3 × 80 = 240.'},
+      {q:'A recruit spends 45 minutes of a 3-hour training block on classroom instruction. What percentage of the block is classroom instruction?', o:['20%','25%','30%','35%'], a:1, e:'3 hours = 180 minutes. 45 ÷ 180 = 0.25 = 25%.'},
+      {q:'A generator uses 2.5 gallons of fuel per hour. How many gallons will it use running continuously for 14 hours?', o:['30','32.5','35','37.5'], a:2, e:'2.5 × 14 = 35 gallons.'},
+      {q:'Three platoons have 38, 42, and 46 soldiers. If 2 more soldiers are added to each platoon, what is the new average platoon size?', o:['42','43','44','45'], a:2, e:'New totals: 40, 44, 48. Average = (40+44+48) ÷ 3 = 132 ÷ 3 = 44.'},
+      {q:'A budget of $15,000 is split between two departments so that Department A receives twice as much as Department B. How much does Department B receive?', o:['$4,000','$4,500','$5,000','$5,500'], a:2, e:'Let B = x, so A = 2x. x + 2x = 15,000 → 3x = 15,000 → x = $5,000.'},
+      {q:'A soldier completes 60% of a 12-mile ruck march before taking a break. How many miles remain after the break?', o:['4.2','4.8','5.2','5.8'], a:1, e:'60% of 12 = 7.2 miles completed. 12 − 7.2 = 4.8 miles remaining.'}
     ]},
   { key:'WK', name:'Word Knowledge', icon:'📖', afqt:true, gt:true, blurb:'Vocabulary — pick the closest synonym.',
     study:{
