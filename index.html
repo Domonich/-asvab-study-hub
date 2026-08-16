@@ -173,6 +173,12 @@ body.dark .study-section-block h4 { color: var(--orange-light); }
 .focus-item.mid { background: var(--amber-bg); }
 .activity-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
 .activity-row:last-child { border-bottom: none; }
+
+/* GT realistic test */
+.gt-timer { font-size: 1.3rem; font-weight: 800; color: var(--navy); white-space: nowrap; min-width: 60px; text-align: right; }
+body.dark .gt-timer { color: var(--orange-light); }
+.gt-timer.low { color: var(--red); }
+.gt-format-note { font-size: 0.78rem; margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -182,6 +188,11 @@ body.dark .study-section-block h4 { color: var(--orange-light); }
   <div class="nav-section">
     <div class="nav-section-title">Overview</div>
     <button class="nav-link active" data-target="dashboard">Dashboard</button>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">🎖️ GT Assessment</div>
+    <button class="nav-link" data-target="gtstudy">GT Study Guide</button>
+    <button class="nav-link" data-target="gttest">GT Realistic Test</button>
   </div>
   <div class="nav-section">
     <div class="nav-section-title">Study</div>
@@ -307,6 +318,18 @@ body.dark .study-section-block h4 { color: var(--orange-light); }
   <div class="section" id="sec-progress">
     <div class="topbar"><h2>My Progress</h2></div>
     <div id="progressContent"></div>
+  </div>
+
+  <!-- GT STUDY GUIDE (combined AR+WK+PC) -->
+  <div class="section" id="sec-gtstudy">
+    <div class="topbar"><h2>🎖️ GT Study Guide</h2></div>
+    <div id="gtStudyContent"></div>
+  </div>
+
+  <!-- GT REALISTIC TEST -->
+  <div class="section" id="sec-gttest">
+    <div class="topbar"><h2 id="gtTestTitle">GT Realistic Test</h2><button class="btn btn-outline hidden" id="gtTestExitBtn" onclick="exitGTTest()">Exit Test</button></div>
+    <div id="gtTestContent"></div>
   </div>
 
 </div>
@@ -550,7 +573,15 @@ const SECTIONS = [
       {passage:'The concept of "muscle memory" is somewhat misleading — muscles themselves don\'t store memories. Instead, repeated practice strengthens neural pathways in the brain and spinal cord that control specific movements, making them feel automatic over time.', q:'According to the passage, what actually changes with repeated practice?', o:['The muscle tissue stores the memory directly','Neural pathways controlling movement are strengthened','Nothing changes physically','Only the bones adapt'], a:1, e:'The passage states that repeated practice strengthens neural pathways in the brain and spinal cord, not the muscles themselves.'},
       {passage:'Redundancy in critical systems — having a backup for essential functions — is a deliberate design choice, not wasted resources. A single point of failure in life-support or navigation equipment can turn a minor malfunction into a catastrophic one.', q:'The passage argues that redundancy is:', o:['A waste of resources','A deliberate, valuable safeguard against catastrophic failure','Only useful in civilian systems','Unnecessary for life-support equipment'], a:1, e:'The passage explicitly frames redundancy as a deliberate design choice, not wasted resources, that guards against catastrophic failure.'},
       {passage:'Field reports indicate that units with clearly rotated sleep schedules maintain significantly higher alertness scores than those with irregular rest, even when total sleep hours are similar. Consistency, not just quantity, appears to matter.', q:'The passage suggests that alertness depends on:', o:['Total sleep hours alone, regardless of consistency','Sleep consistency, not just total hours','Caffeine intake','Time of day only'], a:1, e:'The passage states that consistency of sleep schedule, not just total hours, predicts alertness.'},
-      {passage:'A common misconception is that camouflage is only about color matching. In practice, effective camouflage also accounts for pattern disruption, texture, and movement, since the human eye is especially good at detecting motion and unnatural outlines even when color blends in.', q:'According to the passage, effective camouflage depends on more than:', o:['Pattern disruption','Color matching alone','Texture','Movement'], a:1, e:'The passage opens by correcting the misconception that camouflage is only about color matching, then lists pattern, texture, and movement as additional factors.'}
+      {passage:'A common misconception is that camouflage is only about color matching. In practice, effective camouflage also accounts for pattern disruption, texture, and movement, since the human eye is especially good at detecting motion and unnatural outlines even when color blends in.', q:'According to the passage, effective camouflage depends on more than:', o:['Pattern disruption','Color matching alone','Texture','Movement'], a:1, e:'The passage opens by correcting the misconception that camouflage is only about color matching, then lists pattern, texture, and movement as additional factors.'},
+      {passage:'Performance evaluations increasingly incorporate 360-degree feedback, gathering input not just from a supervisor but from peers and subordinates as well. Proponents argue this produces a more complete picture of leadership than a single rater\'s perspective ever could.', q:'According to the passage, 360-degree feedback differs from traditional evaluation by:', o:['Removing supervisor input entirely','Adding peer and subordinate perspectives to the supervisor\'s','Eliminating the need for evaluations','Only being used for junior enlisted personnel'], a:1, e:'The passage states 360-degree feedback gathers input from peers and subordinates in addition to the supervisor, not instead of.'},
+      {passage:'Fitness periodization divides training into distinct phases — base building, intensity, and tapering — rather than training at maximum effort every day. Athletes who taper properly in the final phase typically perform better on test day than those who train hard right up until it.', q:'The passage suggests that training hard right up until test day:', o:['Guarantees the best performance','Is not the approach associated with the best performance','Is required for periodization to work','Has no relationship to performance'], a:1, e:'The passage contrasts tapering (associated with better performance) with training hard right up to test day, implying the latter performs worse.'},
+      {passage:'Just-in-time logistics delivers supplies at the moment they\'re needed rather than stockpiling large reserves in advance. This reduces storage costs and waste, but it also leaves units more vulnerable if a single delivery is delayed or disrupted.', q:'The passage\'s main point is that just-in-time logistics:', o:['Has no downsides','Trades lower storage costs for greater vulnerability to disruption','Is always inferior to stockpiling','Only applies to civilian companies'], a:1, e:'The passage presents both the benefit (lower costs/waste) and the tradeoff (vulnerability to disruption) of just-in-time logistics.'},
+      {passage:'Combat medics train extensively on hemorrhage control, since uncontrolled bleeding is the leading cause of preventable death on the battlefield. Applying a tourniquet correctly within the first minutes of a traumatic injury can be the difference between life and death.', q:'As used in the passage, "hemorrhage control" most nearly refers to:', o:['Preventing infection','Stopping severe bleeding','Treating broken bones','Managing pain'], a:1, e:'The passage links hemorrhage control directly to bleeding and tourniquet use, both pointing to stopping severe bleeding.'},
+      {passage:'Rules of engagement define the circumstances and limitations under which forces may use force. They are established by commanders based on the mission, the law of armed conflict, and political considerations, and can change from one operation to the next.', q:'According to the passage, rules of engagement are established based on:', o:['Personal preference of individual soldiers','Mission, law of armed conflict, and political considerations','Only the law of armed conflict','A single fixed standard that never changes'], a:1, e:'The passage explicitly lists mission, law of armed conflict, and political considerations as the basis, and notes they can change between operations.'},
+      {passage:'Small reconnaissance teams rely on stealth and observation rather than firepower, gathering information on enemy positions without being detected. Their value comes from the intelligence they bring back, not from direct engagement.', q:'The passage suggests that a reconnaissance team\'s success depends more on:', o:['Winning firefights','Gathering and returning with intelligence undetected','Outnumbering the enemy','Using heavy weapons'], a:1, e:'The passage states their value comes from intelligence gathered without detection, explicitly not from direct engagement.'},
+      {passage:'The Uniform Code of Military Justice establishes a legal system separate from civilian courts, covering offenses unique to military service alongside many crimes also recognized in civilian law. It does not, however, replace a service member\'s constitutional protections during proceedings.', q:'According to the passage, the UCMJ:', o:['Replaces all constitutional protections','Covers offenses unique to military service as well as some civilian crimes, while preserving constitutional protections','Only applies in combat zones','Has no relationship to civilian law'], a:1, e:'The passage states the UCMJ covers military-specific and civilian-recognized offenses, and explicitly does not replace constitutional protections.'},
+      {passage:'Resilience training teaches service members coping strategies before adversity strikes, rather than only offering support after a crisis has already occurred. The goal is prevention: building mental toughness proactively, the same way physical training builds the body.', q:'The main idea of this passage is that resilience training:', o:['Only helps after a crisis has occurred','Proactively builds mental toughness before adversity strikes, similar to physical training','Replaces physical fitness training','Is unnecessary for most service members'], a:1, e:'The passage frames resilience training as proactive prevention, drawing a direct comparison to physical training.'}
     ]},
   { key:'MK', name:'Mathematics Knowledge', icon:'➗', afqt:true, gt:false, blurb:'Algebra, geometry, and general math concepts.',
     study:{
@@ -744,10 +775,13 @@ function show(target) {
   if (target === 'results') renderResults();
 }
 document.querySelectorAll('.nav-link[data-target]').forEach(l => l.addEventListener('click', () => {
+  if (typeof clearGTTimer === 'function') clearGTTimer(); // navigating away from an in-progress GT test should stop its clock
   if (l.dataset.target === 'assessment') startAssessment();
   else if (l.dataset.target === 'study') { show('study'); renderStudyHome(); }
   else if (l.dataset.target === 'practice') { show('practice'); renderPracticeSetup(); }
   else if (l.dataset.target === 'progress') { show('progress'); renderProgress(); }
+  else if (l.dataset.target === 'gtstudy') { show('gtstudy'); renderGTStudyGuide(); }
+  else if (l.dataset.target === 'gttest') { show('gttest'); renderGTSetup(); }
   else show(l.dataset.target);
 }));
 document.getElementById('darkToggle').addEventListener('click', () => {
@@ -1286,12 +1320,18 @@ function renderProgress() {
     </div>
   `).join('');
 
+  const TYPE_META = {
+    diagnostic: { label: 'Diagnostic', color: 'var(--navy)' },
+    practice: { label: 'Practice', color: 'var(--teal)' },
+    gt_test: { label: 'GT Realistic Test', color: 'var(--orange)' }
+  };
   const recent = history.slice(-15).reverse();
   const recentHtml = recent.map(h => {
     const s = SECTIONS.find(x => x.key === h.domain);
     const date = new Date(h.ts);
+    const meta = TYPE_META[h.type] || { label: h.type, color: 'var(--teal)' };
     return `<div class="activity-row">
-      <span>${s ? s.icon + ' ' + s.name : h.domain} <span class="tag" style="margin:0;background:${h.type === 'diagnostic' ? 'var(--navy)' : 'var(--teal)'};">${h.type}</span></span>
+      <span>${s ? s.icon + ' ' + s.name : h.domain} <span class="tag" style="margin:0;background:${meta.color};">${meta.label}</span></span>
       <span>${h.correct}/${h.total} (${h.pct}%) — ${date.toLocaleDateString()}</span>
     </div>`;
   }).join('');
@@ -1311,6 +1351,244 @@ function renderProgress() {
       ${recentHtml}
     </div>
   `;
+}
+
+/* ---------- GT STUDY GUIDE (combined AR + WK + PC) ---------- */
+
+function renderGTStudyGuide() {
+  const domains = ['AR', 'WK', 'PC'].map(k => SECTIONS.find(s => s.key === k));
+  document.getElementById('gtStudyContent').innerHTML = `
+    <div class="card goal-card">
+      <h3>🎖️ Everything That Drives Your GT Score</h3>
+      <p>Your GT line score is built only from Arithmetic Reasoning, Word Knowledge, and Paragraph Comprehension. All three study guides are combined here so you can work straight through without switching pages.</p>
+    </div>
+    ${domains.map(s => `
+      <div class="card">
+        <h3>${s.icon} ${s.name}</h3>
+        <p>${s.study.intro}</p>
+      </div>
+      ${s.study.sections.map(sec => `
+        <div class="card study-section-block">
+          <h4>${sec.h}</h4>
+          <p>${sec.body}</p>
+          ${sec.items && sec.items.length ? `<ul>${sec.items.map(it => `<li>${it}</li>`).join('')}</ul>` : ''}
+        </div>
+      `).join('')}
+    `).join('')}
+    <div class="card" style="text-align:center;">
+      <button class="btn btn-primary" style="font-size:1rem;padding:12px 28px;" onclick="show('gttest'); renderGTSetup();">Take the GT Realistic Test →</button>
+    </div>
+  `;
+}
+
+/* ---------- GT REALISTIC TEST (timed, real question counts, real order) ---------- */
+
+const GT_ORDER = ['AR', 'WK', 'PC'];
+const GT_TIMING = {
+  cat: { AR: { count: 15, minutes: 55 }, WK: { count: 15, minutes: 9 }, PC: { count: 10, minutes: 27 } },
+  pp: { AR: { count: 30, minutes: 36 }, WK: { count: 35, minutes: 11 }, PC: { count: 15, minutes: 13 } }
+};
+let gtFormat = null;
+let gtSectionIdx = 0;
+let gtSectionQuiz = [];
+let gtSectionAnswers = [];
+let gtQIndex = 0;
+let gtTimeLeft = 0;
+let gtTimerHandle = null;
+let gtResults = [];
+
+function renderGTSetup() {
+  clearGTTimer();
+  document.getElementById('gtTestExitBtn').classList.add('hidden');
+  document.getElementById('gtTestTitle').textContent = 'GT Realistic Test';
+  document.getElementById('gtTestContent').innerHTML = `
+    <div class="card goal-card">
+      <h3>🎖️ Simulate the Real ASVAB — GT Subtests Only</h3>
+      <p>This runs Arithmetic Reasoning, Word Knowledge, and Paragraph Comprehension back-to-back, in the real test's order, with the real question counts and time limits. No instant feedback, no walkthroughs, and — on CAT format — no going back once you move to the next question. You'll see your results only at the very end, just like the real thing.</p>
+      <p style="font-size:0.78rem;color:var(--text-light);"><em>This can't reproduce your exact GT line score — that requires the military's own IRT/norm-table scoring — but running it under real timing pressure gives a far more honest signal than an untimed quiz.</em></p>
+    </div>
+    <div class="domain-grid">
+      <div class="study-domain-card" onclick="startGTTest('cat')">
+        <h4>💻 CAT-ASVAB Format (Recommended)</h4>
+        <p>Computer format used at MEPS.<br>AR: 15q / 55min · WK: 15q / 9min · PC: 10q / 27min (~91 min total).</p>
+        <p class="gt-format-note" style="color:var(--red);">Cannot go back once you move to the next question.</p>
+      </div>
+      <div class="study-domain-card" onclick="startGTTest('pp')">
+        <h4>📝 P&amp;P-ASVAB Format</h4>
+        <p>Paper format used at some MET sites.<br>AR: 30q / 36min · WK: 35q / 11min · PC: 15q / 13min (~60 min total).</p>
+        <p class="gt-format-note" style="color:var(--text-light);">You may move back to previous questions within a section.</p>
+      </div>
+    </div>
+  `;
+}
+
+function startGTTest(format) {
+  gtFormat = format;
+  gtSectionIdx = 0;
+  gtResults = [];
+  document.getElementById('gtTestExitBtn').classList.remove('hidden');
+  renderGTSectionIntro();
+}
+
+function renderGTSectionIntro() {
+  clearGTTimer();
+  const key = GT_ORDER[gtSectionIdx];
+  const sec = SECTIONS.find(s => s.key === key);
+  const timing = GT_TIMING[gtFormat][key];
+  document.getElementById('gtTestTitle').textContent = `GT Realistic Test — Section ${gtSectionIdx + 1} of ${GT_ORDER.length}`;
+  document.getElementById('gtTestContent').innerHTML = `
+    <div class="card" style="text-align:center;">
+      <h3>${sec.icon} ${sec.name}</h3>
+      <p>${timing.count} questions in ${timing.minutes} minutes.</p>
+      ${gtFormat === 'cat'
+        ? '<p style="color:var(--red);font-weight:600;">Once you move to the next question, you cannot go back — matching real CAT-ASVAB rules.</p>'
+        : '<p style="color:var(--text-light);">You may move back to previous questions within this section.</p>'}
+      <button class="btn btn-primary" style="margin-top:14px;font-size:1rem;padding:12px 28px;" onclick="beginGTSection()">Begin Section →</button>
+    </div>
+  `;
+}
+
+function beginGTSection() {
+  const key = GT_ORDER[gtSectionIdx];
+  const timing = GT_TIMING[gtFormat][key];
+  gtSectionQuiz = shuffle(getDomainPool(key)).slice(0, timing.count);
+  gtSectionAnswers = new Array(gtSectionQuiz.length).fill(-1);
+  gtQIndex = 0;
+  gtTimeLeft = timing.minutes * 60;
+  startGTTimer();
+  renderGTQuestion();
+}
+
+function startGTTimer() {
+  clearGTTimer();
+  gtTimerHandle = setInterval(() => {
+    gtTimeLeft--;
+    updateGTTimerDisplay();
+    if (gtTimeLeft <= 0) {
+      clearGTTimer();
+      finishGTSection(true);
+    }
+  }, 1000);
+}
+function clearGTTimer() {
+  if (gtTimerHandle) { clearInterval(gtTimerHandle); gtTimerHandle = null; }
+}
+function updateGTTimerDisplay() {
+  const el = document.getElementById('gtTimerDisplay');
+  if (!el) return;
+  const m = Math.floor(gtTimeLeft / 60), s = gtTimeLeft % 60;
+  el.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+  el.classList.toggle('low', gtTimeLeft <= 60);
+}
+
+function renderGTQuestion() {
+  const item = gtSectionQuiz[gtQIndex];
+  const answered = gtSectionAnswers[gtQIndex] !== -1;
+  const optsHtml = item.o.map((opt, i) => `<button class="option ${gtSectionAnswers[gtQIndex] === i ? 'selected' : ''}" onclick="selectGTOption(${i})">${opt}</button>`).join('');
+  const m = Math.floor(gtTimeLeft / 60), s = gtTimeLeft % 60;
+  document.getElementById('gtTestContent').innerHTML = `
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:12px;">
+        <div class="progress-wrap" style="flex:1;margin-bottom:0;"><div class="progress-bar" style="width:${(gtQIndex / gtSectionQuiz.length) * 100}%"></div></div>
+        <div class="gt-timer ${gtTimeLeft <= 60 ? 'low' : ''}" id="gtTimerDisplay">${m}:${s.toString().padStart(2, '0')}</div>
+      </div>
+      <div class="q-meta">${SECTIONS.find(x => x.key === item.sectionKey).name} — Question ${gtQIndex + 1} of ${gtSectionQuiz.length}</div>
+      ${item.passage ? `<div class="q-passage">${item.passage}</div>` : ''}
+      <div class="q-text">${item.q}</div>
+      <div>${optsHtml}</div>
+      <div class="quiz-nav">
+        ${gtFormat === 'pp' ? `<button class="btn btn-outline" ${gtQIndex === 0 ? 'disabled' : ''} onclick="prevGTQuestion()">← Previous</button>` : '<span></span>'}
+        <button class="btn btn-primary" ${answered ? '' : 'disabled'} onclick="nextGTQuestion()">${gtQIndex === gtSectionQuiz.length - 1 ? 'Finish Section →' : 'Next →'}</button>
+      </div>
+    </div>
+  `;
+}
+
+function selectGTOption(i) {
+  gtSectionAnswers[gtQIndex] = i;
+  renderGTQuestion();
+}
+
+function prevGTQuestion() {
+  if (gtFormat !== 'pp' || gtQIndex === 0) return;
+  gtQIndex--;
+  renderGTQuestion();
+}
+
+function nextGTQuestion() {
+  if (gtQIndex < gtSectionQuiz.length - 1) {
+    gtQIndex++;
+    renderGTQuestion();
+  } else {
+    finishGTSection(false);
+  }
+}
+
+function finishGTSection(timedOut) {
+  clearGTTimer();
+  const key = GT_ORDER[gtSectionIdx];
+  const correct = gtSectionQuiz.reduce((sum, item, i) => sum + (gtSectionAnswers[i] === item.a ? 1 : 0), 0);
+  const total = gtSectionQuiz.length;
+  const answeredCount = gtSectionAnswers.filter(a => a !== -1).length;
+  gtResults.push({ key, name: SECTIONS.find(s => s.key === key).name, correct, total, answeredCount, timedOut });
+  gtSectionIdx++;
+  if (gtSectionIdx < GT_ORDER.length) {
+    renderGTSectionIntro();
+  } else {
+    finishGTTest();
+  }
+}
+
+function finishGTTest() {
+  clearGTTimer();
+  document.getElementById('gtTestExitBtn').classList.add('hidden');
+  document.getElementById('gtTestTitle').textContent = 'GT Realistic Test — Results';
+
+  gtResults.forEach(r => recordAttempt(r.key, r.correct, r.total, 'gt_test'));
+
+  const pctFor = r => Math.round((r.correct / r.total) * 100);
+  const gtAvg = Math.round(gtResults.reduce((sum, r) => sum + pctFor(r), 0) / gtResults.length);
+
+  let statusHtml;
+  if (gtAvg >= 85) {
+    statusHtml = `Strong (${gtAvg}%) under real timing conditions — this is a good sign for hitting GT 110+, assuming this held up under genuine test pressure, which it just did.`;
+  } else if (gtAvg >= 65) {
+    statusHtml = `Borderline (${gtAvg}%) under real timing conditions — you're in range but not comfortably. Focus on your weakest section below before test day.`;
+  } else {
+    statusHtml = `Below target (${gtAvg}%) under real timing conditions — this is valuable information: you now know where the real gap is, timing included.`;
+  }
+  const statusCls = gtAvg >= 85 ? 'strong' : gtAvg >= 65 ? 'mid' : 'weak';
+
+  document.getElementById('gtTestContent').innerHTML = `
+    <div class="card score-hero">
+      <div class="num">${gtAvg}%</div>
+      <div class="label">GT Composite (Practice Indicator)</div>
+    </div>
+    <div class="card goal-card">
+      <div class="gt-status ${statusCls}">${statusHtml}</div>
+      <p style="font-size:0.78rem;color:var(--text-light);margin-top:10px;"><em>This is a raw-score indicator under realistic timing — not your official GT line score, which requires the military's IRT/norm-table scoring system.</em></p>
+    </div>
+    <div class="card">
+      <h3>Score by Section</h3>
+      ${gtResults.map(r => `
+        <div class="bar-row">
+          <div class="name">${SECTIONS.find(s => s.key === r.key).icon} ${r.name}</div>
+          <div class="bar-track"><div class="bar-fill fill-${bandFor(pctFor(r)).cls}" style="width:${pctFor(r)}%"></div></div>
+          <div class="bar-pct">${pctFor(r)}%</div>
+          <div style="width:220px;text-align:right;font-size:0.78rem;color:var(--text-light);">${r.correct}/${r.total} correct${r.answeredCount < r.total ? ` · only answered ${r.answeredCount} (ran out of time)` : ''}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="card" style="text-align:center;">
+      <button class="btn btn-primary" onclick="renderGTSetup()">Take Again →</button>
+      <button class="btn btn-outline" style="margin-left:10px;" onclick="show('progress'); renderProgress();">View Progress →</button>
+    </div>
+  `;
+}
+
+function exitGTTest() {
+  clearGTTimer();
+  show('dashboard');
 }
 </script>
 </body>
