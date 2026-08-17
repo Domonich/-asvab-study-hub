@@ -539,7 +539,17 @@ const SECTIONS = [
       {topic:'geometry', q:'A rectangular field is twice as long as it is wide. If its width is 40 yards, what is its area?', o:['2,800','3,000','3,200','3,400'], a:2, e:'Length = 2 × 40 = 80 yards. Area = 80 × 40 = 3,200 square yards.'},
       {topic:'geometry', q:'A circular helicopter landing pad has a diameter of 30 feet. What is its approximate area (use π ≈ 3.14)?', o:['675.5','690','706.5','720'], a:2, e:'Radius = 15 feet. Area = πr² = 3.14 × 225 = 706.5 square feet.'},
       {topic:'geometry', q:'A ramp forms a right triangle with the ground: it rises 6 feet over a horizontal distance of 8 feet. How long is the ramp itself (the hypotenuse)?', o:['9','10','11','12'], a:1, e:'By the Pythagorean theorem: √(6² + 8²) = √(36+64) = √100 = 10 feet.'},
-      {topic:'geometry', q:'A rectangular tent floor measures 10 feet by 12 feet. A second tent has double the floor area but the same 10-foot width. How long is the second tent?', o:['20','22','24','26'], a:2, e:'Original area = 10×12 = 120 sq ft. Double = 240 sq ft. Length = 240 ÷ 10 = 24 feet.'}
+      {topic:'geometry', q:'A rectangular tent floor measures 10 feet by 12 feet. A second tent has double the floor area but the same 10-foot width. How long is the second tent?', o:['20','22','24','26'], a:2, e:'Original area = 10×12 = 120 sq ft. Double = 240 sq ft. Length = 240 ÷ 10 = 24 feet.'},
+      {topic:'drt', q:'A resupply drone flies 60 miles in 40 minutes at a constant speed. How many miles will it cover in 90 minutes at the same rate?', o:['120','125','135','140'], a:2, e:'Rate = 60 ÷ 40 = 1.5 miles per minute. In 90 minutes: 1.5 × 90 = 135 miles.'},
+      {topic:'equations', q:'Three times a number, plus 9, equals 45. What is the number?', o:['9','10','12','14'], a:2, e:'3x + 9 = 45 → 3x = 36 → x = 12.'},
+      {topic:'fractions', q:'A convoy uses 3/8 of its fuel supply on the outbound leg. What fraction of the fuel supply remains for the return leg?', o:['3/8','1/2','5/8','3/4'], a:2, e:'Remaining fraction = 1 − 3/8 = 5/8.'},
+      {topic:'geometry', q:'A rectangular helipad is 60 feet by 45 feet. What is the length of its diagonal?', o:['65','70','75','80'], a:2, e:'By the Pythagorean theorem: √(60² + 45²) = √(3,600 + 2,025) = √5,625 = 75 feet.'},
+      {topic:'operations', q:'Evaluate: 3 + 2 × (8 − 3)² ÷ 5', o:['11','12','13','14'], a:2, e:'(8−3) = 5, 5² = 25, 2×25 = 50, 50÷5 = 10, 3+10 = 13.'},
+      {topic:'numprop', q:'Which of the following is an even number that is also a multiple of 5?', o:['15','20','25','35'], a:1, e:'20 is even and divisible by 5 (20 ÷ 5 = 4). The others (15, 25, 35) are all odd.'},
+      {topic:'percentage', q:'A unit\'s on-time attendance rate rose from 76% to 95%. What was the percentage-point increase (not percent increase)?', o:['15','17','19','21'], a:2, e:'A percentage-point increase is a simple subtraction: 95 − 76 = 19 percentage points.'},
+      {topic:'ratio', q:'A fruit punch recipe mixes juice and soda in a ratio of 5:1. How many quarts of juice are needed for 3 quarts of soda?', o:['10','12','15','18'], a:2, e:'The soda amount (3) is 3 times the ratio\'s "1", so juice = 5 × 3 = 15 quarts.'},
+      {topic:'statistics', q:'A soldier\'s four PT scores are 74, 81, 88, and 93. What is the average of these four scores?', o:['82','83','84','85'], a:2, e:'(74 + 81 + 88 + 93) ÷ 4 = 336 ÷ 4 = 84.'},
+      {topic:'unitconv', q:'A cargo pallet weighs 2.5 metric tons. How many kilograms is that (1 metric ton = 1,000 kg)?', o:['2,000','2,250','2,500','2,750'], a:2, e:'2.5 × 1,000 = 2,500 kilograms.'}
     ]},
   { key:'WK', name:'Word Knowledge', icon:'📖', afqt:true, gt:true, blurb:'Vocabulary — pick the closest synonym.',
     study:{
@@ -613,7 +623,37 @@ const SECTIONS = [
       {q:'The zealous new recruit volunteered for every extra assignment. "Zealous" most nearly means:', o:['Indifferent','Enthusiastic','Exhausted','Careless'], a:1, e:'Zealous (enthusiastic, eager) fits volunteering for extra assignments.'},
       {q:'Removing the superfluous equipment lightened the pack considerably. "Superfluous" most nearly means:', o:['Essential','Unnecessary, excess','Heavy','Broken'], a:1, e:'Superfluous (unnecessary, excess) equipment is exactly what you\'d remove to lighten a pack.'},
       {q:'The garrulous soldier talked through the entire watch shift. "Garrulous" most nearly means:', o:['Silent','Excessively talkative','Tired','Focused'], a:1, e:'Garrulous (excessively talkative) matches talking through an entire shift.'},
-      {q:'The fastidious inspector rejected the uniform over a single loose thread. "Fastidious" most nearly means:', o:['Careless','Extremely attentive to detail','Generous','Confused'], a:1, e:'Fastidious (extremely attentive to detail, hard to please) fits rejecting a uniform over one loose thread.'}
+      {q:'The fastidious inspector rejected the uniform over a single loose thread. "Fastidious" most nearly means:', o:['Careless','Extremely attentive to detail','Generous','Confused'], a:1, e:'Fastidious (extremely attentive to detail, hard to please) fits rejecting a uniform over one loose thread.'},
+      {q:'"Ambivalent" most nearly means:', o:['Having mixed or contradictory feelings','Extremely certain','Angry','Indifferent'], a:0, e:'Ambivalent describes having mixed or conflicting feelings about something — not the same as not caring (indifferent).'},
+      {q:'"Coerce" most nearly means:', o:['Persuade gently','Force or compel','Reward','Ignore'], a:1, e:'Coerce means to force or compel someone to do something, often through pressure or threats.'},
+      {q:'"Digress" most nearly means:', o:['Stay on topic','Depart from the main subject','Conclude quickly','Repeat verbatim'], a:1, e:'To digress is to wander away from the main topic of discussion.'},
+      {q:'"Enervate" most nearly means:', o:['Energize','Weaken or drain of energy','Excite','Calm gently'], a:1, e:'Enervate means to weaken or drain someone of energy or vitality.'},
+      {q:'"Fervent" most nearly means:', o:['Indifferent','Showing intense passion or enthusiasm','Quiet','Confused'], a:1, e:'Fervent describes having or showing great intensity of feeling or belief.'},
+      {q:'"Gregarious" most nearly means:', o:['Shy and withdrawn','Sociable, fond of company','Angry','Careless'], a:1, e:'Gregarious describes someone who is sociable and enjoys being around others.'},
+      {q:'"Hapless" most nearly means:', o:['Fortunate','Unlucky','Skilled','Wealthy'], a:1, e:'Hapless means unlucky or unfortunate.'},
+      {q:'"Impetuous" most nearly means:', o:['Careful and deliberate','Acting suddenly without thought','Slow','Wise'], a:1, e:'Impetuous describes acting quickly and without careful thought.'},
+      {q:'"Judicious" most nearly means:', o:['Careless','Showing good judgment, sensible','Angry','Reckless'], a:1, e:'Judicious means having or showing good judgment, especially in practical matters.'},
+      {q:'"Lucid" most nearly means:', o:['Confusing','Clear and easy to understand','Loud','Hidden'], a:1, e:'Lucid describes something expressed clearly, easy to understand.'},
+      {q:'"Nebulous" most nearly means:', o:['Clear and precise','Vague or unclear','Bright','Solid'], a:1, e:'Nebulous describes something vague, unclear, or ill-defined.'},
+      {q:'"Palpable" most nearly means:', o:['Invisible','Obvious, able to be felt or perceived','Quiet','Uncertain'], a:1, e:'Palpable describes something so intense or obvious it can almost be physically felt.'},
+      {q:'"Quell" most nearly means:', o:['Encourage','Suppress or put an end to','Celebrate','Ignore'], a:1, e:'To quell something is to suppress or extinguish it, such as a rebellion or fear.'},
+      {q:'"Rescind" most nearly means:', o:['Approve permanently','Cancel or revoke','Delay','Strengthen'], a:1, e:'Rescind means to cancel, revoke, or repeal an order, law, or agreement.'},
+      {q:'"Ubiquitous" most nearly means:', o:['Rare','Present everywhere','Hidden','Expensive'], a:1, e:'Ubiquitous describes something that seems to be present everywhere at once.'},
+      {q:'The constant noise in the barracks began to vex even the most patient soldiers. "Vex" most nearly means:', o:['Please','Annoy or frustrate','Calm','Ignore'], a:1, e:'Vex means to annoy or frustrate someone — fitting for noise wearing down even patient people.'},
+      {q:'Given the unfamiliar terrain, the patrol leader remained wary of potential ambush sites. "Wary" most nearly means:', o:['Careless','Cautious, on guard','Confident','Relaxed'], a:1, e:'Wary means cautious and alert to potential danger, fitting unfamiliar terrain and ambush risk.'},
+      {q:'After several days, the storm began to abate, allowing operations to resume. "Abate" most nearly means:', o:['Intensify','Lessen in intensity','Begin suddenly','Remain unchanged'], a:1, e:'Abate means to become less intense — consistent with operations being able to resume afterward.'},
+      {q:'The briefing was valued for its brevity, covering all key points in under five minutes. "Brevity" most nearly means:', o:['Length and detail','Shortness, conciseness','Confusion','Delay'], a:1, e:'Brevity means shortness or conciseness of expression, matching a five-minute briefing.'},
+      {q:'The technician\'s deft handling of the equipment prevented a costly malfunction. "Deft" most nearly means:', o:['Clumsy','Skillful','Slow','Careless'], a:1, e:'Deft means skillful and quick in action — fitting for preventing a malfunction.'},
+      {q:'The scout was trained to elude enemy patrols without being detected. "Elude" most nearly means:', o:['Confront directly','Escape or avoid skillfully','Surrender to','Alert'], a:1, e:'Elude means to skillfully avoid or escape from someone or something, matching "without being detected."'},
+      {q:'Living on a tight budget taught the recruit to be frugal with his monthly pay. "Frugal" most nearly means:', o:['Wasteful','Economical, careful with money','Generous','Careless'], a:1, e:'Frugal means being careful and economical with money or resources, fitting a tight budget.'},
+      {q:'The new officer\'s haughty attitude toward enlisted soldiers quickly damaged morale. "Haughty" most nearly means:', o:['Humble','Arrogantly proud','Friendly','Nervous'], a:1, e:'Haughty means arrogantly superior or proud, which plausibly damages morale.'},
+      {q:'Some believe a sense of duty is innate, while others see it as something learned. "Innate" most nearly means:', o:['Learned through training','Inborn, natural from birth','Forbidden','Temporary'], a:1, e:'Innate means existing naturally from birth, contrasted here with "learned."'},
+      {q:'The rumor was designed to malign the commander\'s reputation among the troops. "Malign" most nearly means:', o:['Praise','Speak evil of, slander','Ignore','Promote'], a:1, e:'Malign means to speak badly of someone in order to damage their reputation.'},
+      {q:'The mission\'s true objective remained obscure to most of the platoon until the final briefing. "Obscure" most nearly means:', o:['Well known','Not clear, hidden from understanding','Exciting','Dangerous'], a:1, e:'Obscure means not clearly understood or known, matching "until the final briefing."'},
+      {q:'After the accident, he preferred a solitary post away from the rest of the unit. "Solitary" most nearly means:', o:['Crowded','Alone, single','Dangerous','Temporary'], a:1, e:'Solitary means being or living alone, fitting "away from the rest of the unit."'},
+      {q:'Compared to the mission\'s overall risk, the paperwork delay seemed trivial. "Trivial" most nearly means:', o:['Extremely important','Of little importance','Urgent','Confusing'], a:1, e:'Trivial means of little value or importance, especially by comparison.'},
+      {q:'The trail seemed to meander endlessly through the dense forest. "Meander" most nearly means:', o:['Go in a straight line','Wander aimlessly, follow a winding course','Stop suddenly','Climb steeply'], a:1, e:'Meander means to follow a winding, indirect course rather than a straight path.'},
+      {q:'Even under heavy fire, the stalwart soldier refused to abandon his post. "Stalwart" most nearly means:', o:['Cowardly','Loyal and dependable','Confused','Injured'], a:1, e:'Stalwart means loyal, reliable, and strong in the face of adversity.'}
     ]},
   { key:'PC', name:'Paragraph Comprehension', icon:'📝', afqt:true, gt:true, blurb:'Read a short passage and answer a question about it.',
     study:{
@@ -653,7 +693,27 @@ const SECTIONS = [
       {passage:'Rules of engagement define the circumstances and limitations under which forces may use force. They are established by commanders based on the mission, the law of armed conflict, and political considerations, and can change from one operation to the next.', q:'According to the passage, rules of engagement are established based on:', o:['Personal preference of individual soldiers','Mission, law of armed conflict, and political considerations','Only the law of armed conflict','A single fixed standard that never changes'], a:1, e:'The passage explicitly lists mission, law of armed conflict, and political considerations as the basis, and notes they can change between operations.'},
       {passage:'Small reconnaissance teams rely on stealth and observation rather than firepower, gathering information on enemy positions without being detected. Their value comes from the intelligence they bring back, not from direct engagement.', q:'The passage suggests that a reconnaissance team\'s success depends more on:', o:['Winning firefights','Gathering and returning with intelligence undetected','Outnumbering the enemy','Using heavy weapons'], a:1, e:'The passage states their value comes from intelligence gathered without detection, explicitly not from direct engagement.'},
       {passage:'The Uniform Code of Military Justice establishes a legal system separate from civilian courts, covering offenses unique to military service alongside many crimes also recognized in civilian law. It does not, however, replace a service member\'s constitutional protections during proceedings.', q:'According to the passage, the UCMJ:', o:['Replaces all constitutional protections','Covers offenses unique to military service as well as some civilian crimes, while preserving constitutional protections','Only applies in combat zones','Has no relationship to civilian law'], a:1, e:'The passage states the UCMJ covers military-specific and civilian-recognized offenses, and explicitly does not replace constitutional protections.'},
-      {passage:'Resilience training teaches service members coping strategies before adversity strikes, rather than only offering support after a crisis has already occurred. The goal is prevention: building mental toughness proactively, the same way physical training builds the body.', q:'The main idea of this passage is that resilience training:', o:['Only helps after a crisis has occurred','Proactively builds mental toughness before adversity strikes, similar to physical training','Replaces physical fitness training','Is unnecessary for most service members'], a:1, e:'The passage frames resilience training as proactive prevention, drawing a direct comparison to physical training.'}
+      {passage:'Resilience training teaches service members coping strategies before adversity strikes, rather than only offering support after a crisis has already occurred. The goal is prevention: building mental toughness proactively, the same way physical training builds the body.', q:'The main idea of this passage is that resilience training:', o:['Only helps after a crisis has occurred','Proactively builds mental toughness before adversity strikes, similar to physical training','Replaces physical fitness training','Is unnecessary for most service members'], a:1, e:'The passage frames resilience training as proactive prevention, drawing a direct comparison to physical training.'},
+      {passage:'Physical training doctrine increasingly emphasizes injury prevention alongside performance gains, recognizing that a soldier sidelined by a preventable injury contributes nothing to unit readiness. Programs now include mobility work and recovery days that were once considered optional.', q:'The passage suggests that mobility work and recovery days are now:', o:['Considered optional extras','Treated as important, not optional','Eliminated from training','Only for injured soldiers'], a:1, e:'The passage states these were "once considered optional," implying they no longer are — now treated as important.'},
+      {passage:'Convoy security relies on establishing overlapping fields of observation among vehicles, so that no single blind spot goes unwatched. A gap in coverage, even briefly, can be exploited by an alert adversary.', q:'According to the passage, overlapping fields of observation are meant to:', o:['Slow down the convoy','Eliminate blind spots in coverage','Reduce the number of vehicles needed','Replace the need for security altogether'], a:1, e:'The passage states overlapping observation ensures "no single blind spot goes unwatched."'},
+      {passage:'Debriefs conducted immediately after a mission tend to capture more accurate detail than those conducted days later, since memory of specific sequences fades quickly. Units that delay debriefs often find that soldiers unconsciously fill gaps with assumptions rather than actual recollection.', q:'The passage implies that delayed debriefs risk:', o:['Capturing more accurate detail','Soldiers substituting assumptions for real memory','Improving unit morale','Reducing operational tempo'], a:1, e:'The passage states delayed debriefs lead soldiers to "fill gaps with assumptions rather than actual recollection."'},
+      {passage:'Marksmanship fundamentals rest on four consistent elements: stable position, proper sight alignment, controlled breathing, and smooth trigger squeeze. Neglecting any single element, even while executing the others well, degrades accuracy substantially.', q:'According to the passage, marksmanship accuracy depends on:', o:['Only trigger control','A single dominant skill','Consistently combining all four elements','Equipment quality alone'], a:2, e:'The passage states that neglecting even one of the four elements degrades accuracy, implying all four matter together.'},
+      {passage:'Some assume that rank alone earns obedience, but sustained compliance in a unit is better explained by trust built through consistent, fair treatment over time. Soldiers follow leaders they respect, not merely those who outrank them.', q:'The main idea of the passage is that sustained obedience in a unit comes primarily from:', o:['Rank alone','Trust built through fair, consistent leadership','Fear of punishment','Random chance'], a:1, e:'The passage explicitly contrasts rank with trust built over time, favoring the latter as the real explanation.'},
+      {passage:'Night operations degrade depth perception and color recognition, which is why units train extensively with night vision devices before relying on them in the field. Familiarity with the equipment\'s limitations is as important as familiarity with its capabilities.', q:'As used in the passage, the phrase "the equipment\'s limitations" most nearly refers to:', o:['The advantages night vision provides','The ways night vision devices fall short or distort perception','The cost of the equipment','The weight of the equipment'], a:1, e:'In context, "limitations" contrasts with "capabilities," referring to the ways the equipment falls short.'},
+      {passage:'Field sanitation practices, though unglamorous, historically prevent more casualties in prolonged operations than any weapon system. Disease and non-battle injury have sidelined more troops throughout military history than direct combat in many prolonged campaigns.', q:'The passage suggests that historically, extended campaigns have lost more personnel to:', o:['Direct combat exclusively','Disease and non-battle injury','Equipment failure','Weather alone'], a:1, e:'The passage directly states disease and non-battle injury sidelined more troops than direct combat in many prolonged campaigns.'},
+      {passage:'A well-constructed contingency plan does not attempt to predict every possible outcome; instead, it identifies the most likely failure points and prepares flexible responses to them. Attempting to plan for every conceivable scenario often produces a plan too rigid to adapt to what actually happens.', q:'According to the passage, an overly detailed contingency plan risks becoming:', o:['More flexible','Too rigid to adapt to actual events','Impossible to create','Unnecessary for operations'], a:1, e:'The passage states that planning for every scenario often produces a plan "too rigid to adapt to what actually happens."'},
+      {passage:'Servicemembers transitioning to civilian careers often underestimate how directly their military experience translates — skills like structured problem-solving under pressure and leading diverse teams are in high demand, even if the job titles look unfamiliar on paper.', q:'The passage suggests that transitioning servicemembers often:', o:['Overestimate their civilian job prospects','Underestimate how well their skills translate to civilian careers','Have no transferable skills','Should avoid civilian careers'], a:1, e:'The passage opens by stating servicemembers "often underestimate how directly their military experience translates."'},
+      {passage:'Encryption protects the content of a message, but traffic analysis — studying the pattern, timing, and volume of communications — can reveal significant intelligence even without breaking the encryption itself. Operational security must account for both.', q:'According to the passage, traffic analysis can reveal intelligence:', o:['Only by breaking encryption first','Without needing to break the encryption','Only in the absence of any encryption','Exclusively through captured documents'], a:1, e:'The passage states traffic analysis works "even without breaking the encryption itself."'},
+      {passage:'A tourniquet applied too loosely can be worse than no tourniquet at all, since it may restrict venous return while failing to stop arterial bleeding, actually increasing blood loss at the wound site.', q:'The passage implies that a loosely applied tourniquet can:', o:['Always stop all bleeding effectively','Potentially increase blood loss at the wound','Have no effect whatsoever','Only affect venous flow, never arterial'], a:1, e:'The passage states a loose tourniquet can restrict venous return while failing to stop arterial bleeding, "actually increasing blood loss."'},
+      {passage:'Leaders who ask questions rather than issue directives during training scenarios often develop subordinates who can reason through novel problems independently, rather than subordinates who wait for explicit instructions in unfamiliar situations.', q:'The main idea of the passage is that a questioning leadership style tends to:', o:['Produce subordinates who wait for instructions','Develop subordinates capable of independent reasoning','Slow down training unnecessarily','Undermine a leader\'s authority'], a:1, e:'The passage contrasts a questioning style (developing independent reasoning) with directive-issuing (producing subordinates who wait for instructions).'},
+      {passage:'Vehicle maintenance logs serve a purpose beyond simple record-keeping: patterns across multiple logs can reveal a recurring defect across an entire fleet before it causes a widespread failure, something a single vehicle\'s history would never show.', q:'According to the passage, examining maintenance logs across a fleet can reveal:', o:['Nothing useful beyond individual vehicle history','Recurring defects across the fleet before widespread failure','Only the age of each vehicle','Fuel efficiency exclusively'], a:1, e:'The passage states fleet-wide log patterns "can reveal a recurring defect... before it causes a widespread failure."'},
+      {passage:'Adaptability under a chain of command does not mean abandoning the original intent of an order when circumstances change; it means finding a new way to accomplish that same intent when the original method becomes impossible.', q:'As used in the passage, adapting to new circumstances means:', o:['Ignoring the original intent of an order','Finding a new way to fulfill the same original intent','Waiting for new orders before acting','Refusing to act until conditions improve'], a:1, e:'The passage explicitly defines adaptability as finding "a new way to accomplish that same intent" when the original method fails.'},
+      {passage:'Studies of decision-making under fatigue consistently show a decline in judgment quality after extended periods without rest, even when the individual does not subjectively feel impaired. This gap between perceived and actual capability is part of why work-rest cycles are enforced rather than left to personal judgment.', q:'The passage suggests that work-rest cycles are enforced because:', o:['People accurately judge their own fatigue','People often don\'t perceive their own fatigue-related decline','Rest has no effect on decision-making','Fatigue only affects physical, not mental, performance'], a:1, e:'The passage cites a "gap between perceived and actual capability" as the reason enforcement is needed rather than personal judgment.'},
+      {passage:'A unit\'s supply sergeant tracks not just what has been issued, but what has been returned, lost, or damaged — a distinction that determines whether missing equipment is a paperwork issue or one requiring formal investigation.', q:'According to the passage, the distinction the supply sergeant tracks determines:', o:['Whether missing equipment needs paperwork or formal investigation','The total value of all equipment','Who is promoted next','The unit\'s training schedule'], a:0, e:'The passage states this distinction determines whether missing equipment is "a paperwork issue or one requiring formal investigation."'},
+      {passage:'Combat lifesavers are not medics, but they receive enough training to stabilize a casualty until higher-level care arrives, closing a critical gap in the minutes immediately following an injury.', q:'According to the passage, combat lifesavers exist primarily to:', o:['Replace medics entirely','Stabilize casualties in the critical minutes before higher-level care arrives','Perform surgery in the field','Train other medics'], a:1, e:'The passage states their role is to "stabilize a casualty until higher-level care arrives."'},
+      {passage:'A common error in land navigation is trusting a GPS device so completely that basic terrain association skills atrophy, leaving a soldier lost the moment the device fails or loses signal.', q:'The passage suggests that over-reliance on GPS can lead to:', o:['Improved terrain association skills','Vulnerability if the device fails or loses signal','Faster navigation in all conditions','No real risk at all'], a:1, e:'The passage warns that over-reliance leaves a soldier "lost the moment the device fails or loses signal."'},
+      {passage:'Unit cohesion is often mistaken for the mere absence of conflict, but genuinely cohesive units regularly disagree productively — the distinguishing factor is that disagreements resolve through trust rather than escalating into lasting division.', q:'According to the passage, genuinely cohesive units are distinguished by:', o:['A total absence of any disagreement','Disagreements that resolve through trust rather than escalating','Avoiding all difficult conversations','Having identical opinions on every issue'], a:1, e:'The passage states cohesive units "regularly disagree productively," with disagreements resolved through trust.'},
+      {passage:'When a piece of equipment fails a functions check, the immediate priority is isolating whether the failure is user error, a minor fix, or a deeper fault requiring higher-level maintenance — attempting a fix before diagnosing the actual cause often wastes more time than it saves.', q:'The passage suggests that attempting a fix before diagnosing the cause:', o:['Always saves time','Often wastes more time than it saves','Is required by regulation','Has no real downside'], a:1, e:'The passage states directly that fixing before diagnosing "often wastes more time than it saves."'}
     ]},
   { key:'MK', name:'Mathematics Knowledge', icon:'➗', afqt:true, gt:false, blurb:'Algebra, geometry, and general math concepts.',
     study:{
@@ -821,7 +881,7 @@ function buildQuiz() {
   quiz = [];
   SECTIONS.forEach(sec => {
     sec.questions.slice(0, 8).forEach(item => {
-      quiz.push({ sectionKey: sec.key, sectionName: sec.name, ...item });
+      quiz.push(shuffleOptions({ sectionKey: sec.key, sectionName: sec.name, ...item }));
     });
   });
 }
@@ -1144,6 +1204,13 @@ function shuffle(arr) {
   return a;
 }
 
+// Randomizes the on-screen position of the answer choices so the correct answer isn't
+// predictable by slot (e.g. "it's always option B") — a real gap the static data had.
+function shuffleOptions(item) {
+  const order = shuffle(item.o.map((_, i) => i));
+  return { ...item, o: order.map(i => item.o[i]), a: order.indexOf(item.a) };
+}
+
 function renderPracticeSetup(preselect) {
   document.getElementById('practiceTitle').textContent = 'Practice Quiz';
   document.getElementById('practiceBackBtn').classList.add('hidden');
@@ -1223,7 +1290,7 @@ function selectPracticeTopic(topicKey) {
 }
 
 function startPractice(domainKey, count, topic) {
-  practiceQuiz = shuffle(getDomainPool(domainKey, topic)).slice(0, count);
+  practiceQuiz = shuffle(getDomainPool(domainKey, topic)).slice(0, count).map(shuffleOptions);
   practiceAnswers = new Array(practiceQuiz.length).fill(-1);
   practiceRevealed = new Array(practiceQuiz.length).fill(false);
   practiceConfidence = new Array(practiceQuiz.length).fill(null);
@@ -1567,7 +1634,7 @@ function renderGTSectionIntro() {
 function beginGTSection() {
   const key = GT_ORDER[gtSectionIdx];
   const timing = GT_TIMING[gtFormat][key];
-  gtSectionQuiz = shuffle(getDomainPool(key)).slice(0, timing.count);
+  gtSectionQuiz = shuffle(getDomainPool(key)).slice(0, timing.count).map(shuffleOptions);
   gtSectionAnswers = new Array(gtSectionQuiz.length).fill(-1);
   gtQIndex = 0;
   gtTimeLeft = timing.minutes * 60;
@@ -1646,7 +1713,7 @@ function finishGTSection(timedOut) {
   const correct = gtSectionQuiz.reduce((sum, item, i) => sum + (gtSectionAnswers[i] === item.a ? 1 : 0), 0);
   const total = gtSectionQuiz.length;
   const answeredCount = gtSectionAnswers.filter(a => a !== -1).length;
-  gtResults.push({ key, name: SECTIONS.find(s => s.key === key).name, correct, total, answeredCount, timedOut });
+  gtResults.push({ key, name: SECTIONS.find(s => s.key === key).name, correct, total, answeredCount, timedOut, quiz: gtSectionQuiz, answers: gtSectionAnswers });
   gtSectionIdx++;
   if (gtSectionIdx < GT_ORDER.length) {
     renderGTSectionIntro();
@@ -1675,6 +1742,11 @@ function finishGTTest() {
   }
   const statusCls = gtAvg >= 85 ? 'strong' : gtAvg >= 65 ? 'mid' : 'weak';
 
+  gtAllReviewItems = gtResults.flatMap(r => r.quiz.map((item, i) => ({
+    ...item, sectionName: r.name, sectionIcon: SECTIONS.find(s => s.key === r.key).icon,
+    userAnswer: r.answers[i], isCorrect: r.answers[i] === item.a
+  })));
+
   document.getElementById('gtTestContent').innerHTML = `
     <div class="card score-hero">
       <div class="num">${gtAvg}%</div>
@@ -1699,7 +1771,37 @@ function finishGTTest() {
       <button class="btn btn-primary" onclick="renderGTSetup()">Take Again →</button>
       <button class="btn btn-outline" style="margin-left:10px;" onclick="show('progress'); renderProgress();">View Progress →</button>
     </div>
+    <div class="card">
+      <h3>Review Every Question</h3>
+      <p style="font-size:0.78rem;color:var(--text-light);margin-bottom:10px;">Every question from this run, right or wrong, with the correct answer and a full explanation — so you understand exactly why, not just what.</p>
+      <div class="count-btn-row" style="margin-bottom:14px;">
+        <button class="count-btn selected" id="gtReviewFilterAll" onclick="renderGTReview('all')">All (${gtAllReviewItems.length})</button>
+        <button class="count-btn" id="gtReviewFilterMissed" onclick="renderGTReview('missed')">Missed (${gtAllReviewItems.filter(x => !x.isCorrect).length})</button>
+        <button class="count-btn" id="gtReviewFilterCorrect" onclick="renderGTReview('correct')">Correct (${gtAllReviewItems.filter(x => x.isCorrect).length})</button>
+      </div>
+      <div id="gtReviewList"></div>
+    </div>
   `;
+  renderGTReview('all');
+}
+
+let gtAllReviewItems = [];
+
+function renderGTReview(filter) {
+  ['All', 'Missed', 'Correct'].forEach(f => document.getElementById('gtReviewFilter' + f).classList.toggle('selected', f.toLowerCase() === filter));
+  const items = gtAllReviewItems.filter(x => filter === 'all' || (filter === 'missed' && !x.isCorrect) || (filter === 'correct' && x.isCorrect));
+  document.getElementById('gtReviewList').innerHTML = items.length ? items.map(x => `
+    <div class="review-item">
+      <div style="font-size:0.72rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">${x.sectionIcon} ${x.sectionName} · ${x.isCorrect ? '<span style="color:var(--green);">✓ Correct</span>' : '<span style="color:var(--red);">✗ Missed</span>'}</div>
+      ${x.passage ? `<div class="q-passage" style="margin-bottom:8px;">${x.passage}</div>` : ''}
+      <div style="font-weight:600;margin-bottom:6px;">${x.q}</div>
+      ${x.userAnswer === -1
+        ? '<div class="your-answer">You did not answer this question (ran out of time).</div>'
+        : `<div class="${x.isCorrect ? 'correct-answer' : 'your-answer'}">Your answer: ${x.o[x.userAnswer]}</div>`}
+      ${!x.isCorrect ? `<div class="correct-answer">Correct answer: ${x.o[x.a]}</div>` : ''}
+      <div style="margin-top:4px;color:var(--text-light);">${x.e}</div>
+    </div>
+  `).join('') : '<p style="color:var(--text-light);font-size:0.85rem;">No questions in this filter.</p>';
 }
 
 function exitGTTest() {
