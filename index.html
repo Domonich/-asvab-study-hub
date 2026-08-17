@@ -383,6 +383,11 @@ const SECTIONS = [
       {q:'Which of these is an example of a chemical change rather than a physical change?', o:['Melting ice','Dissolving sugar in water','Rusting iron','Crushing a can'], a:2, e:'Rusting is a chemical reaction (iron + oxygen → iron oxide) that forms a new substance; the others are physical changes with no new substance formed.'}
     ]},
   { key:'AR', name:'Arithmetic Reasoning', icon:'🧮', afqt:true, gt:true, blurb:'Word problems using basic math operations.',
+    topics:{
+      drt:'Distance, Rate & Time', equations:'Equations', fractions:'Fractions', geometry:'Geometry',
+      operations:'Math Operations', numprop:'Number Properties', percentage:'Percentages',
+      ratio:'Ratios & Proportions', statistics:'Statistics', unitconv:'Unit Conversion'
+    },
     study:{
       intro:'Arithmetic Reasoning is word problems built on basic operations — addition, subtraction, multiplication, division, percentages, ratios, and averages. The math itself is simple; the challenge is translating a paragraph into the right equation. This is one of your three GT subtests, so it directly drives your 110 target.',
       sections:[
@@ -414,60 +419,127 @@ const SECTIONS = [
           'Step 2 — Identify the operation: a 20% cut means the new pay is 80% of the original — so original × 0.80 = 2,000.',
           'Step 3 — Solve: original = 2,000 ÷ 0.80 = 2,500.',
           'Step 4 — Sanity check: 2,500 × 0.80 = 2,000 ✓. Notice you divide to undo a percentage cut — multiplying 2,000 × 1.20 would be the classic wrong-direction mistake.'
+        ]},
+        {h:'Topic Quick-Reference (All 10 AR Categories)', body:'One-line refreshers for every topic in the practice bank below — jump to whichever you need.', items:[
+          'Distance, Rate & Time: D = R × T. Rearrange as needed (R = D/T, T = D/R). Combined/relative speed problems add or subtract rates depending on direction of travel.',
+          'Equations: Translate words into an equation with a variable, then isolate it by doing the opposite operation to both sides. Age and "sum/difference of two numbers" problems are classic setups.',
+          'Fractions: Find a common denominator to add/subtract; multiply straight across to multiply; flip and multiply to divide. "X/Y of a number" means multiply.',
+          'Geometry: Rectangle A = l×w, P = 2(l+w). Circle C = 2πr, A = πr². Triangle A = ½bh. Right triangle: a² + b² = c² (Pythagorean theorem). Box volume = l×w×h.',
+          'Math Operations: Follow order of operations (PEMDAS) — parentheses, exponents, multiply/divide left-to-right, then add/subtract left-to-right.',
+          'Number Properties: Know factors/multiples (GCF, LCM), prime numbers, odd/even rules (odd×odd=odd, even×anything=even), and remainders from division.',
+          'Percentages: "X% of Y" = (X/100)×Y. Reverse percentage (find the original): divide the end amount by (1 ± the percent change as a decimal).',
+          'Ratios & Proportions: Find the scale factor between the given part and the ratio\'s matching number, then apply that same factor to find the unknown part.',
+          'Statistics: Average = sum ÷ count. Median = middle value when sorted. Mode = most frequent value. Range = max − min.',
+          'Unit Conversion: Multiply by the conversion factor to go from a larger unit to a smaller one (e.g., miles→feet); divide to go from smaller to larger (e.g., ounces→pounds).'
         ]}
       ]
     },
     questions:[
-      {q:'A quartermaster mixes 4 gallons of a cleaning solution that is 25% bleach with 6 gallons of a solution that is 10% bleach. What percent bleach is the combined 10-gallon mixture?', o:['15%','16%','18%','20%'], a:1, e:'Bleach amount = (4 × 0.25) + (6 × 0.10) = 1 + 0.6 = 1.6 gallons. 1.6 ÷ 10 total gallons = 16%.'},
-      {q:'A supply route is 15,840 feet long. How many miles is that (5,280 feet = 1 mile)?', o:['2','2.5','3','3.5'], a:2, e:'15,840 ÷ 5,280 = 3 miles.'},
-      {q:'A drill instructor is currently 3 times as old as a recruit. In 5 years, the instructor will be twice as old as the recruit. How old is the recruit now?', o:['4','5','6','7'], a:1, e:'Let the recruit\'s age be x, so the instructor is 3x. In 5 years: 3x + 5 = 2(x + 5) → 3x + 5 = 2x + 10 → x = 5.'},
-      {q:'The sum of three consecutive integers is 72. What is the largest of the three?', o:['23','24','25','26'], a:2, e:'Let the integers be x, x+1, x+2. Their sum is 3x + 3 = 72 → x = 23. The largest is x + 2 = 25.'},
-      {q:'Soldier A can dig a trench alone in 6 hours; Soldier B can dig the same trench alone in 3 hours. Working together, how long will it take them?', o:['1.5 hours','2 hours','2.5 hours','4 hours'], a:1, e:'Combined rate = 1/6 + 1/3 = 1/6 + 2/6 = 3/6 = 1/2 trench per hour. Time = 1 ÷ (1/2) = 2 hours.'},
-      {q:'A surplus store buys a jacket for $40 and sells it for $52. What is the percent markup?', o:['20%','25%','30%','35%'], a:2, e:'Markup = (52 − 40) ÷ 40 = 12 ÷ 40 = 0.30 = 30%.'},
-      {q:'A soldier\'s gear weighs 152 ounces. How many pounds is that (16 ounces = 1 pound)?', o:['8.5','9','9.5','10'], a:2, e:'152 ÷ 16 = 9.5 pounds.'},
-      {q:'A recruit\'s test score of 200 improves by 10% after week one, then improves by another 10% of the NEW score after week two. What is the score after week two?', o:['220','230','240','242'], a:3, e:'Week one: 200 × 1.10 = 220. Week two: 220 × 1.10 = 242 (not simply 200 × 1.20, since the second 10% applies to the already-increased score).'},
-      {q:'A class has 12 students who averaged 80 on a test and 8 students who averaged 90. What is the overall average for all 20 students?', o:['82','84','85','86'], a:1, e:'Weighted average = (12 × 80 + 8 × 90) ÷ 20 = (960 + 720) ÷ 20 = 1,680 ÷ 20 = 84 (not a simple average of 80 and 90).'},
-      {q:'A flight departs at 9:45 AM and arrives 4 hours 35 minutes later. What time does it arrive?', o:['1:50 PM','2:10 PM','2:20 PM','2:35 PM'], a:2, e:'9:45 AM + 4 hours = 1:45 PM. 1:45 PM + 35 minutes = 2:20 PM.'},
-      {q:'A supply order splits $2,400 among three categories in the ratio 2:3:5. How much is allocated to the largest category?', o:['$800','$960','$1,200','$1,400'], a:2, e:'Total parts = 2+3+5 = 10. Each part = 2,400 ÷ 10 = $240. Largest category = 5 × $240 = $1,200.'},
-      {q:'A convoy drives at 50 mph for 2 hours, stops for 30 minutes, then drives at 50 mph for another 1.5 hours. What total distance did it travel (not counting the stop)?', o:['150 miles','160 miles','175 miles','200 miles'], a:2, e:'(50 × 2) + (50 × 1.5) = 100 + 75 = 175 miles. The stop adds time but no distance.'},
-      {q:'A tool costs $80 and is discounted 20%, after which 8% sales tax is added to the discounted price. What is the final price?', o:['$64.00','$66.56','$69.12','$72.00'], a:2, e:'Discounted price: 80 × 0.80 = $64. Tax is applied to that: 64 × 1.08 = $69.12.'},
-      {q:'After a 20% pay cut, a soldier\'s monthly pay is $2,000. What was the pay before the cut?', o:['$2,200','$2,400','$2,500','$2,600'], a:2, e:'If original × 0.80 = 2,000, then original = 2,000 ÷ 0.80 = $2,500.'},
-      {q:'A pump can fill 2/5 of a tank in 1 hour. At this rate, how many hours will it take to fill the entire tank?', o:['2','2.5','3','3.5'], a:1, e:'Time = 1 tank ÷ (2/5 tank per hour) = 5/2 = 2.5 hours.'},
-      {q:'A supply convoy travels the first 120 miles in 3 hours, then covers the remaining 180 miles in 2 hours. What was the convoy\'s average speed for the entire trip?', o:['50 mph','55 mph','60 mph','65 mph'], a:2, e:'Total distance = 120 + 180 = 300 miles. Total time = 3 + 2 = 5 hours. Average speed = 300 ÷ 5 = 60 mph.'},
-      {q:'A recruiting station meets 60% of its monthly goal of 40 enlistees in the first three weeks. How many more enlistees are needed to reach the goal by month\'s end?', o:['12','14','16','18'], a:2, e:'60% of 40 = 24 already met. 40 − 24 = 16 still needed.'},
-      {q:'A unit\'s quarterly fuel budget is $20,000. In the first month, 40% is spent. In the second month, 25% of the remaining balance is spent. How much remains for the third month?', o:['$8,000','$8,500','$9,000','$9,500'], a:2, e:'40% of 20,000 = 8,000 spent; remainder = 12,000. 25% of 12,000 = 3,000 spent; remainder = 12,000 − 3,000 = $9,000.'},
-      {q:'A recruit\'s times (in minutes) for four practice runs are 14, 13, 15, and an unknown fourth run. If the average of all four runs is 14 minutes, what was the fourth run\'s time?', o:['12','13','14','16'], a:2, e:'Total needed for average of 14 over 4 runs = 56. 14+13+15 = 42. 56 − 42 = 14 minutes.'},
-      {q:'Two units start 330 miles apart and move toward each other, one at 50 mph and the other at 60 mph. How many hours until they meet?', o:['2','3','4','5'], a:1, e:'Combined closing speed = 50 + 60 = 110 mph. Time = 330 ÷ 110 = 3 hours.'},
-      {q:'A warehouse reduces its inventory by 20% in January, then reduces the new total by another 25% in February. If it started with 4,000 units, how many remain after February?', o:['2,000','2,200','2,400','2,600'], a:2, e:'January: 4,000 × 0.80 = 3,200. February: 3,200 × 0.75 = 2,400 remaining.'},
-      {q:'A recruiter\'s goal is to sign 5 recruits per week for 12 weeks (60 total). After 8 weeks, 34 recruits have signed. On average, how many per week are needed over the remaining weeks to hit the total goal?', o:['5','5.5','6','6.5'], a:3, e:'Remaining needed = 60 − 34 = 26. Remaining weeks = 12 − 8 = 4. 26 ÷ 4 = 6.5 per week.'},
-      {q:'A vehicle\'s fuel tank holds 24 gallons and gets 18 miles per gallon. If the tank is currently at 1/3 capacity, how many more miles can it travel before running out of fuel?', o:['120','132','144','156'], a:2, e:'1/3 of 24 gallons = 8 gallons remaining. 8 × 18 mpg = 144 miles.'},
-      {q:'A drill sergeant assigns push-ups as punishment: 10 for the first infraction, doubling with each subsequent infraction. How many push-ups is the 4th infraction?', o:['40','60','80','100'], a:2, e:'10, 20, 40, 80 — each infraction doubles the last, so the 4th infraction is 80 push-ups.'},
-      {q:'If it takes 6 soldiers 8 hours to set up a field camp, how many hours would it take 4 soldiers working at the same rate to complete the same job?', o:['9','10','12','14'], a:2, e:'Total work = 6 × 8 = 48 soldier-hours. At 4 soldiers: 48 ÷ 4 = 12 hours.'},
-      {q:'A care package weighing 18 pounds costs $2.50 per pound to ship, plus a flat $5 handling fee. What is the total shipping cost?', o:['$45','$48','$50','$55'], a:2, e:'18 × $2.50 = $45. $45 + $5 handling fee = $50.'},
-      {q:'A unit\'s readiness score increased from 72 to 90. What was the percent increase?', o:['18%','20%','25%','30%'], a:2, e:'Change = 90 − 72 = 18. Percent increase = 18 ÷ 72 = 0.25 = 25%.'},
-      {q:'A tank travels 8 miles in 15 minutes at a constant speed. At this rate, how far will it travel in 2 hours?', o:['56 miles','60 miles','64 miles','68 miles'], a:2, e:'Rate = 8 miles ÷ 15 min = 32 mph (since 15 min = 1/4 hour, 8 ÷ 1/4 = 32). In 2 hours: 32 × 2 = 64 miles.'},
-      {q:'A company has a ratio of 2 sergeants for every 15 privates. If the company has 34 sergeants, how many privates are there?', o:['225','240','255','270'], a:2, e:'34 sergeants ÷ 2 = 17 groups of the ratio. 17 × 15 privates = 255 privates.'},
-      {q:'A recruit needs an overall average of at least 80 across 5 events to pass. Scores on the first four events are 75, 82, 88, and 79. What is the minimum score needed on the 5th event to reach an average of exactly 80?', o:['70','74','76','80'], a:2, e:'Total needed for an 80 average over 5 events = 400. Sum of first four = 75+82+88+79 = 324. 400 − 324 = 76.'},
-      {q:'A brigade has 2,800 soldiers, and 35% are combat arms. How many soldiers are in combat arms?', o:['880','930','980','1,020'], a:2, e:'10% of 2,800 = 280. 35% = 3.5 × 280 = 980.'},
-      {q:'Of a company\'s 150 vehicles, 12% are currently down for maintenance. How many vehicles are down?', o:['15','16','18','20'], a:2, e:'10% of 150 = 15. 12% = 15 + (2% of 150 = 3) = 18.'},
-      {q:'A recruiter\'s list has 320 applicants, and 65% pass the initial physical screening. How many applicants pass?', o:['192','200','208','216'], a:2, e:'10% of 320 = 32. 65% = 32 × 6.5 = 208.'},
-      {q:'An armory holds 1,250 rifles, and 8% are due for scheduled maintenance this month. How many rifles need maintenance?', o:['90','95','100','110'], a:2, e:'10% of 1,250 = 125. 8% = 125 × 0.8 = 100.'},
-      {q:'Out of 500 recruits in a training cycle, 22% are assigned to a support MOS. How many recruits get a support MOS?', o:['100','105','110','115'], a:2, e:'10% of 500 = 50. 22% = 50 × 2.2 = 110.'},
-      {q:'A unit\'s equipment readiness report shows 92% of 225 vehicles are mission-capable. How many vehicles are mission-capable?', o:['198','203','207','212'], a:2, e:'10% of 225 = 22.5. 92% = 225 − (8% of 225 = 18) = 207.'},
-      {q:'A base commissary had 2,000 customers last month, and 18% used the self-checkout lanes. How many customers used self-checkout?', o:['340','350','360','380'], a:2, e:'10% of 2,000 = 200. 18% = 200 × 1.8 = 360.'},
-      {q:'Of 750 applicants who took the ASVAB last quarter, 42% scored high enough for their first-choice MOS. How many applicants qualified for their first choice?', o:['300','305','315','325'], a:2, e:'10% of 750 = 75. 42% = 75 × 4.2 = 315.'},
-      {q:'A supply depot has 3,200 items in stock, and 6% are flagged as excess. How many items are flagged as excess?', o:['180','186','192','198'], a:2, e:'10% of 3,200 = 320. 6% = 320 × 0.6 = 192.'},
-      {q:'A squadron of 96 personnel reports 25% currently on leave. How many personnel are on leave?', o:['20','22','24','28'], a:2, e:'25% = 1/4. 96 ÷ 4 = 24.'},
-      {q:'A vehicle depreciates 15% in its first year. If it\'s worth $17,000 at the end of year one, what was its original price?', o:['$19,000','$19,500','$20,000','$20,500'], a:2, e:'If original × 0.85 = 17,000, then original = 17,000 ÷ 0.85 = $20,000.'},
-      {q:'A fitness score dropped 10% from last quarter\'s 220. What is the new score?', o:['190','195','198','200'], a:2, e:'220 × 0.90 = 198.'},
-      {q:'A recruit\'s rucksack march pace is 4 miles per hour. How many minutes will it take to cover 6 miles at that pace?', o:['75','80','90','96'], a:2, e:'Time = 6 ÷ 4 = 1.5 hours = 90 minutes.'},
-      {q:'An obstacle course is 450 yards long. How many feet is that (3 feet = 1 yard)?', o:['1,200','1,250','1,350','1,400'], a:2, e:'450 × 3 = 1,350 feet.'},
-      {q:'A unit\'s total strength is 640, split into two companies in a ratio of 3:5. How many are in the smaller company?', o:['200','220','240','260'], a:2, e:'Total parts = 3 + 5 = 8. Each part = 640 ÷ 8 = 80. Smaller company = 3 × 80 = 240.'},
-      {q:'A recruit spends 45 minutes of a 3-hour training block on classroom instruction. What percentage of the block is classroom instruction?', o:['20%','25%','30%','35%'], a:1, e:'3 hours = 180 minutes. 45 ÷ 180 = 0.25 = 25%.'},
-      {q:'A generator uses 2.5 gallons of fuel per hour. How many gallons will it use running continuously for 14 hours?', o:['30','32.5','35','37.5'], a:2, e:'2.5 × 14 = 35 gallons.'},
-      {q:'Three platoons have 38, 42, and 46 soldiers. If 2 more soldiers are added to each platoon, what is the new average platoon size?', o:['42','43','44','45'], a:2, e:'New totals: 40, 44, 48. Average = (40+44+48) ÷ 3 = 132 ÷ 3 = 44.'},
-      {q:'A budget of $15,000 is split between two departments so that Department A receives twice as much as Department B. How much does Department B receive?', o:['$4,000','$4,500','$5,000','$5,500'], a:2, e:'Let B = x, so A = 2x. x + 2x = 15,000 → 3x = 15,000 → x = $5,000.'},
-      {q:'A soldier completes 60% of a 12-mile ruck march before taking a break. How many miles remain after the break?', o:['4.2','4.8','5.2','5.8'], a:1, e:'60% of 12 = 7.2 miles completed. 12 − 7.2 = 4.8 miles remaining.'}
+      {topic:'percentage', q:'A quartermaster mixes 4 gallons of a cleaning solution that is 25% bleach with 6 gallons of a solution that is 10% bleach. What percent bleach is the combined 10-gallon mixture?', o:['15%','16%','18%','20%'], a:1, e:'Bleach amount = (4 × 0.25) + (6 × 0.10) = 1 + 0.6 = 1.6 gallons. 1.6 ÷ 10 total gallons = 16%.'},
+      {topic:'unitconv', q:'A supply route is 15,840 feet long. How many miles is that (5,280 feet = 1 mile)?', o:['2','2.5','3','3.5'], a:2, e:'15,840 ÷ 5,280 = 3 miles.'},
+      {topic:'equations', q:'A drill instructor is currently 3 times as old as a recruit. In 5 years, the instructor will be twice as old as the recruit. How old is the recruit now?', o:['4','5','6','7'], a:1, e:'Let the recruit\'s age be x, so the instructor is 3x. In 5 years: 3x + 5 = 2(x + 5) → 3x + 5 = 2x + 10 → x = 5.'},
+      {topic:'numprop', q:'The sum of three consecutive integers is 72. What is the largest of the three?', o:['23','24','25','26'], a:2, e:'Let the integers be x, x+1, x+2. Their sum is 3x + 3 = 72 → x = 23. The largest is x + 2 = 25.'},
+      {topic:'drt', q:'Soldier A can dig a trench alone in 6 hours; Soldier B can dig the same trench alone in 3 hours. Working together, how long will it take them?', o:['1.5 hours','2 hours','2.5 hours','4 hours'], a:1, e:'Combined rate = 1/6 + 1/3 = 1/6 + 2/6 = 3/6 = 1/2 trench per hour. Time = 1 ÷ (1/2) = 2 hours.'},
+      {topic:'percentage', q:'A surplus store buys a jacket for $40 and sells it for $52. What is the percent markup?', o:['20%','25%','30%','35%'], a:2, e:'Markup = (52 − 40) ÷ 40 = 12 ÷ 40 = 0.30 = 30%.'},
+      {topic:'unitconv', q:'A soldier\'s gear weighs 152 ounces. How many pounds is that (16 ounces = 1 pound)?', o:['8.5','9','9.5','10'], a:2, e:'152 ÷ 16 = 9.5 pounds.'},
+      {topic:'percentage', q:'A recruit\'s test score of 200 improves by 10% after week one, then improves by another 10% of the NEW score after week two. What is the score after week two?', o:['220','230','240','242'], a:3, e:'Week one: 200 × 1.10 = 220. Week two: 220 × 1.10 = 242 (not simply 200 × 1.20, since the second 10% applies to the already-increased score).'},
+      {topic:'statistics', q:'A class has 12 students who averaged 80 on a test and 8 students who averaged 90. What is the overall average for all 20 students?', o:['82','84','85','86'], a:1, e:'Weighted average = (12 × 80 + 8 × 90) ÷ 20 = (960 + 720) ÷ 20 = 1,680 ÷ 20 = 84 (not a simple average of 80 and 90).'},
+      {topic:'unitconv', q:'A flight departs at 9:45 AM and arrives 4 hours 35 minutes later. What time does it arrive?', o:['1:50 PM','2:10 PM','2:20 PM','2:35 PM'], a:2, e:'9:45 AM + 4 hours = 1:45 PM. 1:45 PM + 35 minutes = 2:20 PM.'},
+      {topic:'ratio', q:'A supply order splits $2,400 among three categories in the ratio 2:3:5. How much is allocated to the largest category?', o:['$800','$960','$1,200','$1,400'], a:2, e:'Total parts = 2+3+5 = 10. Each part = 2,400 ÷ 10 = $240. Largest category = 5 × $240 = $1,200.'},
+      {topic:'drt', q:'A convoy drives at 50 mph for 2 hours, stops for 30 minutes, then drives at 50 mph for another 1.5 hours. What total distance did it travel (not counting the stop)?', o:['150 miles','160 miles','175 miles','200 miles'], a:2, e:'(50 × 2) + (50 × 1.5) = 100 + 75 = 175 miles. The stop adds time but no distance.'},
+      {topic:'percentage', q:'A tool costs $80 and is discounted 20%, after which 8% sales tax is added to the discounted price. What is the final price?', o:['$64.00','$66.56','$69.12','$72.00'], a:2, e:'Discounted price: 80 × 0.80 = $64. Tax is applied to that: 64 × 1.08 = $69.12.'},
+      {topic:'percentage', q:'After a 20% pay cut, a soldier\'s monthly pay is $2,000. What was the pay before the cut?', o:['$2,200','$2,400','$2,500','$2,600'], a:2, e:'If original × 0.80 = 2,000, then original = 2,000 ÷ 0.80 = $2,500.'},
+      {topic:'drt', q:'A pump can fill 2/5 of a tank in 1 hour. At this rate, how many hours will it take to fill the entire tank?', o:['2','2.5','3','3.5'], a:1, e:'Time = 1 tank ÷ (2/5 tank per hour) = 5/2 = 2.5 hours.'},
+      {topic:'drt', q:'A supply convoy travels the first 120 miles in 3 hours, then covers the remaining 180 miles in 2 hours. What was the convoy\'s average speed for the entire trip?', o:['50 mph','55 mph','60 mph','65 mph'], a:2, e:'Total distance = 120 + 180 = 300 miles. Total time = 3 + 2 = 5 hours. Average speed = 300 ÷ 5 = 60 mph.'},
+      {topic:'percentage', q:'A recruiting station meets 60% of its monthly goal of 40 enlistees in the first three weeks. How many more enlistees are needed to reach the goal by month\'s end?', o:['12','14','16','18'], a:2, e:'60% of 40 = 24 already met. 40 − 24 = 16 still needed.'},
+      {topic:'percentage', q:'A unit\'s quarterly fuel budget is $20,000. In the first month, 40% is spent. In the second month, 25% of the remaining balance is spent. How much remains for the third month?', o:['$8,000','$8,500','$9,000','$9,500'], a:2, e:'40% of 20,000 = 8,000 spent; remainder = 12,000. 25% of 12,000 = 3,000 spent; remainder = 12,000 − 3,000 = $9,000.'},
+      {topic:'statistics', q:'A recruit\'s times (in minutes) for four practice runs are 14, 13, 15, and an unknown fourth run. If the average of all four runs is 14 minutes, what was the fourth run\'s time?', o:['12','13','14','16'], a:2, e:'Total needed for average of 14 over 4 runs = 56. 14+13+15 = 42. 56 − 42 = 14 minutes.'},
+      {topic:'drt', q:'Two units start 330 miles apart and move toward each other, one at 50 mph and the other at 60 mph. How many hours until they meet?', o:['2','3','4','5'], a:1, e:'Combined closing speed = 50 + 60 = 110 mph. Time = 330 ÷ 110 = 3 hours.'},
+      {topic:'percentage', q:'A warehouse reduces its inventory by 20% in January, then reduces the new total by another 25% in February. If it started with 4,000 units, how many remain after February?', o:['2,000','2,200','2,400','2,600'], a:2, e:'January: 4,000 × 0.80 = 3,200. February: 3,200 × 0.75 = 2,400 remaining.'},
+      {topic:'statistics', q:'A recruiter\'s goal is to sign 5 recruits per week for 12 weeks (60 total). After 8 weeks, 34 recruits have signed. On average, how many per week are needed over the remaining weeks to hit the total goal?', o:['5','5.5','6','6.5'], a:3, e:'Remaining needed = 60 − 34 = 26. Remaining weeks = 12 − 8 = 4. 26 ÷ 4 = 6.5 per week.'},
+      {topic:'fractions', q:'A vehicle\'s fuel tank holds 24 gallons and gets 18 miles per gallon. If the tank is currently at 1/3 capacity, how many more miles can it travel before running out of fuel?', o:['120','132','144','156'], a:2, e:'1/3 of 24 gallons = 8 gallons remaining. 8 × 18 mpg = 144 miles.'},
+      {topic:'numprop', q:'A drill sergeant assigns push-ups as punishment: 10 for the first infraction, doubling with each subsequent infraction. How many push-ups is the 4th infraction?', o:['40','60','80','100'], a:2, e:'10, 20, 40, 80 — each infraction doubles the last, so the 4th infraction is 80 push-ups.'},
+      {topic:'ratio', q:'If it takes 6 soldiers 8 hours to set up a field camp, how many hours would it take 4 soldiers working at the same rate to complete the same job?', o:['9','10','12','14'], a:2, e:'Total work = 6 × 8 = 48 soldier-hours. At 4 soldiers: 48 ÷ 4 = 12 hours.'},
+      {topic:'operations', q:'A care package weighing 18 pounds costs $2.50 per pound to ship, plus a flat $5 handling fee. What is the total shipping cost?', o:['$45','$48','$50','$55'], a:2, e:'18 × $2.50 = $45. $45 + $5 handling fee = $50.'},
+      {topic:'percentage', q:'A unit\'s readiness score increased from 72 to 90. What was the percent increase?', o:['18%','20%','25%','30%'], a:2, e:'Change = 90 − 72 = 18. Percent increase = 18 ÷ 72 = 0.25 = 25%.'},
+      {topic:'drt', q:'A tank travels 8 miles in 15 minutes at a constant speed. At this rate, how far will it travel in 2 hours?', o:['56 miles','60 miles','64 miles','68 miles'], a:2, e:'Rate = 8 miles ÷ 15 min = 32 mph (since 15 min = 1/4 hour, 8 ÷ 1/4 = 32). In 2 hours: 32 × 2 = 64 miles.'},
+      {topic:'ratio', q:'A company has a ratio of 2 sergeants for every 15 privates. If the company has 34 sergeants, how many privates are there?', o:['225','240','255','270'], a:2, e:'34 sergeants ÷ 2 = 17 groups of the ratio. 17 × 15 privates = 255 privates.'},
+      {topic:'statistics', q:'A recruit needs an overall average of at least 80 across 5 events to pass. Scores on the first four events are 75, 82, 88, and 79. What is the minimum score needed on the 5th event to reach an average of exactly 80?', o:['70','74','76','80'], a:2, e:'Total needed for an 80 average over 5 events = 400. Sum of first four = 75+82+88+79 = 324. 400 − 324 = 76.'},
+      {topic:'percentage', q:'A brigade has 2,800 soldiers, and 35% are combat arms. How many soldiers are in combat arms?', o:['880','930','980','1,020'], a:2, e:'10% of 2,800 = 280. 35% = 3.5 × 280 = 980.'},
+      {topic:'percentage', q:'Of a company\'s 150 vehicles, 12% are currently down for maintenance. How many vehicles are down?', o:['15','16','18','20'], a:2, e:'10% of 150 = 15. 12% = 15 + (2% of 150 = 3) = 18.'},
+      {topic:'percentage', q:'A recruiter\'s list has 320 applicants, and 65% pass the initial physical screening. How many applicants pass?', o:['192','200','208','216'], a:2, e:'10% of 320 = 32. 65% = 32 × 6.5 = 208.'},
+      {topic:'percentage', q:'An armory holds 1,250 rifles, and 8% are due for scheduled maintenance this month. How many rifles need maintenance?', o:['90','95','100','110'], a:2, e:'10% of 1,250 = 125. 8% = 125 × 0.8 = 100.'},
+      {topic:'percentage', q:'Out of 500 recruits in a training cycle, 22% are assigned to a support MOS. How many recruits get a support MOS?', o:['100','105','110','115'], a:2, e:'10% of 500 = 50. 22% = 50 × 2.2 = 110.'},
+      {topic:'percentage', q:'A unit\'s equipment readiness report shows 92% of 225 vehicles are mission-capable. How many vehicles are mission-capable?', o:['198','203','207','212'], a:2, e:'10% of 225 = 22.5. 92% = 225 − (8% of 225 = 18) = 207.'},
+      {topic:'percentage', q:'A base commissary had 2,000 customers last month, and 18% used the self-checkout lanes. How many customers used self-checkout?', o:['340','350','360','380'], a:2, e:'10% of 2,000 = 200. 18% = 200 × 1.8 = 360.'},
+      {topic:'percentage', q:'Of 750 applicants who took the ASVAB last quarter, 42% scored high enough for their first-choice MOS. How many applicants qualified for their first choice?', o:['300','305','315','325'], a:2, e:'10% of 750 = 75. 42% = 75 × 4.2 = 315.'},
+      {topic:'percentage', q:'A supply depot has 3,200 items in stock, and 6% are flagged as excess. How many items are flagged as excess?', o:['180','186','192','198'], a:2, e:'10% of 3,200 = 320. 6% = 320 × 0.6 = 192.'},
+      {topic:'percentage', q:'A squadron of 96 personnel reports 25% currently on leave. How many personnel are on leave?', o:['20','22','24','28'], a:2, e:'25% = 1/4. 96 ÷ 4 = 24.'},
+      {topic:'percentage', q:'A vehicle depreciates 15% in its first year. If it\'s worth $17,000 at the end of year one, what was its original price?', o:['$19,000','$19,500','$20,000','$20,500'], a:2, e:'If original × 0.85 = 17,000, then original = 17,000 ÷ 0.85 = $20,000.'},
+      {topic:'percentage', q:'A fitness score dropped 10% from last quarter\'s 220. What is the new score?', o:['190','195','198','200'], a:2, e:'220 × 0.90 = 198.'},
+      {topic:'drt', q:'A recruit\'s rucksack march pace is 4 miles per hour. How many minutes will it take to cover 6 miles at that pace?', o:['75','80','90','96'], a:2, e:'Time = 6 ÷ 4 = 1.5 hours = 90 minutes.'},
+      {topic:'unitconv', q:'An obstacle course is 450 yards long. How many feet is that (3 feet = 1 yard)?', o:['1,200','1,250','1,350','1,400'], a:2, e:'450 × 3 = 1,350 feet.'},
+      {topic:'ratio', q:'A unit\'s total strength is 640, split into two companies in a ratio of 3:5. How many are in the smaller company?', o:['200','220','240','260'], a:2, e:'Total parts = 3 + 5 = 8. Each part = 640 ÷ 8 = 80. Smaller company = 3 × 80 = 240.'},
+      {topic:'percentage', q:'A recruit spends 45 minutes of a 3-hour training block on classroom instruction. What percentage of the block is classroom instruction?', o:['20%','25%','30%','35%'], a:1, e:'3 hours = 180 minutes. 45 ÷ 180 = 0.25 = 25%.'},
+      {topic:'drt', q:'A generator uses 2.5 gallons of fuel per hour. How many gallons will it use running continuously for 14 hours?', o:['30','32.5','35','37.5'], a:2, e:'2.5 × 14 = 35 gallons.'},
+      {topic:'statistics', q:'Three platoons have 38, 42, and 46 soldiers. If 2 more soldiers are added to each platoon, what is the new average platoon size?', o:['42','43','44','45'], a:2, e:'New totals: 40, 44, 48. Average = (40+44+48) ÷ 3 = 132 ÷ 3 = 44.'},
+      {topic:'equations', q:'A budget of $15,000 is split between two departments so that Department A receives twice as much as Department B. How much does Department B receive?', o:['$4,000','$4,500','$5,000','$5,500'], a:2, e:'Let B = x, so A = 2x. x + 2x = 15,000 → 3x = 15,000 → x = $5,000.'},
+      {topic:'percentage', q:'A soldier completes 60% of a 12-mile ruck march before taking a break. How many miles remain after the break?', o:['4.2','4.8','5.2','5.8'], a:1, e:'60% of 12 = 7.2 miles completed. 12 − 7.2 = 4.8 miles remaining.'},
+      {topic:'unitconv', q:'A weapon system weighs 3.25 tons. How many pounds is that (1 ton = 2,000 lbs)?', o:['6,000','6,250','6,500','6,750'], a:2, e:'3.25 × 2,000 = 6,500 pounds.'},
+      {topic:'unitconv', q:'A training exercise lasts 150 minutes. How many hours and minutes is that?', o:['2 hr 10 min','2 hr 20 min','2 hr 30 min','2 hr 40 min'], a:2, e:'150 ÷ 60 = 2 hours with 30 minutes left over (2 × 60 = 120; 150 − 120 = 30).'},
+      {topic:'unitconv', q:'A vehicle\'s fuel tank holds 15 gallons. How many quarts is that (4 quarts = 1 gallon)?', o:['45','50','60','64'], a:2, e:'15 × 4 = 60 quarts.'},
+      {topic:'unitconv', q:'A map scale shows 1 inch = 2 miles. How many miles does 7.5 inches represent?', o:['12','13.5','15','16.5'], a:2, e:'7.5 × 2 = 15 miles.'},
+      {topic:'unitconv', q:'A soldier\'s height is 74 inches. How many feet and inches is that (12 inches = 1 foot)?', o:['6 ft 0 in','6 ft 2 in','6 ft 4 in','5 ft 10 in'], a:1, e:'74 ÷ 12 = 6 with a remainder of 2 (6 × 12 = 72; 74 − 72 = 2), so 6 ft 2 in.'},
+      {topic:'equations', q:'Solve for x: 4x + 7 = 2x + 19', o:['4','5','6','7'], a:2, e:'4x − 2x = 19 − 7 → 2x = 12 → x = 6.'},
+      {topic:'equations', q:'A recruit is twice as old as their little brother. In 6 years, the recruit will be 1.5 times as old as the brother. How old is the brother now?', o:['4','5','6','8'], a:2, e:'Let the brother be x, so the recruit is 2x. In 6 years: 2x + 6 = 1.5(x + 6) → 2x + 6 = 1.5x + 9 → 0.5x = 3 → x = 6.'},
+      {topic:'equations', q:'The sum of two numbers is 84. One number is 3 times the other. What is the smaller number?', o:['18','21','24','28'], a:1, e:'Let the smaller number be x, so the larger is 3x. x + 3x = 84 → 4x = 84 → x = 21.'},
+      {topic:'equations', q:'A rental costs a flat $30 plus $0.50 per mile driven. If the total bill was $65, how many miles were driven?', o:['60','65','70','75'], a:2, e:'65 − 30 = 35 remaining for mileage. 35 ÷ 0.50 = 70 miles.'},
+      {topic:'equations', q:'Twice a number, decreased by 8, equals 22. What is the number?', o:['11','13','15','17'], a:2, e:'2x − 8 = 22 → 2x = 30 → x = 15.'},
+      {topic:'equations', q:'A unit\'s strength this year is 40 more than twice last year\'s strength. If this year\'s strength is 260, what was last year\'s strength?', o:['100','105','110','115'], a:2, e:'2x + 40 = 260 → 2x = 220 → x = 110.'},
+      {topic:'equations', q:'A total of $9,000 is split between two savings accounts so that Account A has $1,500 more than Account B. How much is in Account B?', o:['$3,500','$3,600','$3,750','$3,900'], a:2, e:'B + (B + 1,500) = 9,000 → 2B = 7,500 → B = $3,750.'},
+      {topic:'numprop', q:'What is the greatest common factor (GCF) of 36 and 48?', o:['6','8','12','24'], a:2, e:'36 = 2²×3², 48 = 2⁴×3. The GCF uses the lowest power of each shared factor: 2²×3 = 12.'},
+      {topic:'numprop', q:'What is the least common multiple (LCM) of 6 and 8?', o:['16','24','32','48'], a:1, e:'6 = 2×3, 8 = 2³. The LCM uses the highest power of each factor: 2³×3 = 24.'},
+      {topic:'numprop', q:'Which of the following numbers is a prime number?', o:['21','27','29','33'], a:2, e:'21 = 3×7, 27 = 3³, 33 = 3×11 are all composite. 29 has no divisors other than 1 and itself, so it\'s prime.'},
+      {topic:'numprop', q:'What is the sum of the first five positive even numbers?', o:['20','25','30','36'], a:2, e:'2 + 4 + 6 + 8 + 10 = 30.'},
+      {topic:'numprop', q:'If n is an odd number, which of the following must also be odd?', o:['n + 1','2n','n²','n ÷ 2'], a:2, e:'Odd × odd = odd, so n² is always odd. n + 1 is always even, 2n is always even, and n ÷ 2 isn\'t generally a whole number.'},
+      {topic:'numprop', q:'A number is divisible by both 3 and 4. Which of the following could it be?', o:['14','18','24','32'], a:2, e:'Divisible by both 3 and 4 means divisible by 12. Only 24 (12×2) qualifies — 18 is divisible by 3 but not 4, and 14/32 aren\'t divisible by 3.'},
+      {topic:'numprop', q:'What is the remainder when 47 is divided by 6?', o:['3','4','5','6'], a:2, e:'6 × 7 = 42, and 47 − 42 = 5, so the remainder is 5.'},
+      {topic:'drt', q:'A helicopter flies 210 miles in 1.5 hours. At the same rate, how long will it take to fly 350 miles?', o:['2 hours','2.25 hours','2.5 hours','2.75 hours'], a:2, e:'Rate = 210 ÷ 1.5 = 140 mph. Time = 350 ÷ 140 = 2.5 hours.'},
+      {topic:'drt', q:'Runner A starts a 10-mile course at 8:00 AM running 5 mph. Runner B starts the same course at 8:30 AM running 6 mph. At what time will Runner B catch up to Runner A?', o:['10:30 AM','11:00 AM','11:30 AM','12:00 PM'], a:1, e:'Let t = hours after 8:30 when B catches A. A has run (t+0.5) hours by then: 5(t+0.5) = 6t → 5t+2.5 = 6t → t = 2.5 hours after 8:30 = 11:00 AM.'},
+      {topic:'ratio', q:'A recipe for camp stew calls for a ratio of 2 cups of rice to 3 cups of beans. If you use 12 cups of beans, how many cups of rice are needed?', o:['6','7','8','9'], a:2, e:'12 beans ÷ 3 = a scale factor of 4. Rice = 2 × 4 = 8 cups.'},
+      {topic:'ratio', q:'A map has a scale of 1:50,000. If two points are 3 inches apart on the map, how many inches apart are they in reality?', o:['100,000','125,000','150,000','175,000'], a:2, e:'3 × 50,000 = 150,000 inches apart in reality.'},
+      {topic:'ratio', q:'In a company, the ratio of men to women is 5:2. If there are 35 men, how many women are there?', o:['10','12','14','16'], a:2, e:'35 men ÷ 5 = a scale factor of 7. Women = 2 × 7 = 14.'},
+      {topic:'ratio', q:'An alloy is made of copper and zinc in a ratio of 7:3. How many pounds of copper are in 40 pounds of the alloy?', o:['24','26','28','30'], a:2, e:'Total parts = 7+3 = 10, so each part = 40 ÷ 10 = 4 lbs. Copper = 7 × 4 = 28 lbs.'},
+      {topic:'ratio', q:'Two numbers are in the ratio 4:7. If their sum is 99, what is the larger number?', o:['56','60','63','66'], a:2, e:'Total parts = 4+7 = 11, so each part = 99 ÷ 11 = 9. Larger number = 7 × 9 = 63.'},
+      {topic:'fractions', q:'What is 2/3 + 1/6?', o:['1/2','2/3','3/4','5/6'], a:3, e:'Common denominator 6: 4/6 + 1/6 = 5/6.'},
+      {topic:'fractions', q:'Simplify 8/12 to lowest terms.', o:['1/2','2/3','3/4','4/6'], a:1, e:'The GCF of 8 and 12 is 4: 8÷4 = 2, 12÷4 = 3, giving 2/3.'},
+      {topic:'fractions', q:'A tank is 3/4 full. After using 1/3 of what\'s in the tank, what fraction of the full tank remains?', o:['1/3','5/12','1/2','2/3'], a:2, e:'Amount used = 1/3 × 3/4 = 1/4 of the tank. Remaining = 3/4 − 1/4 = 1/2.'},
+      {topic:'fractions', q:'What is 5/8 of 64?', o:['32','35','40','45'], a:2, e:'64 × 5/8 = 320/8 = 40.'},
+      {topic:'fractions', q:'Which fraction is greater: 5/8 or 7/12?', o:['5/8','7/12','They are equal','Cannot be determined'], a:0, e:'Common denominator 24: 5/8 = 15/24 and 7/12 = 14/24, so 5/8 is greater.'},
+      {topic:'fractions', q:'A recipe requires 2 1/2 cups of flour per batch. How many total cups of flour are needed for 3 batches?', o:['6.5','7','7.5','8'], a:2, e:'2.5 × 3 = 7.5 cups.'},
+      {topic:'fractions', q:'Subtract: 7/9 − 2/9', o:['4/9','5/9','5/18','1'], a:1, e:'Same denominator, subtract numerators: (7−2)/9 = 5/9.'},
+      {topic:'fractions', q:'If 3/5 of a 60-soldier platoon passed a fitness test, how many soldiers passed?', o:['30','33','36','40'], a:2, e:'60 × 3/5 = 180/5 = 36 soldiers.'},
+      {topic:'operations', q:'Evaluate: 8 + 4 × 3 − 6 ÷ 2', o:['13','15','17','19'], a:2, e:'Multiply/divide first: 4×3=12, 6÷2=3. Then 8 + 12 − 3 = 17.'},
+      {topic:'operations', q:'Evaluate: (12 − 4) × (3 + 2)', o:['32','36','40','44'], a:2, e:'Parentheses first: 8 × 5 = 40.'},
+      {topic:'operations', q:'Evaluate: 5² + 3 × (7 − 4)', o:['28','31','34','37'], a:2, e:'5² = 25, (7−4) = 3, 3×3 = 9. 25 + 9 = 34.'},
+      {topic:'operations', q:'Evaluate: 100 ÷ (5 × 2) + 6', o:['12','14','16','18'], a:2, e:'5×2 = 10, 100÷10 = 10, 10 + 6 = 16.'},
+      {topic:'operations', q:'Evaluate: 6 + [2 × (9 − 5)] ÷ 4', o:['6','7','8','9'], a:2, e:'9−5 = 4, 2×4 = 8, 8÷4 = 2, 6 + 2 = 8.'},
+      {topic:'operations', q:'Evaluate: −3 + (−5) × 2', o:['−16','−13','−8','−1'], a:1, e:'Multiply first: (−5)×2 = −10. Then −3 + (−10) = −13.'},
+      {topic:'operations', q:'Evaluate: 4³ ÷ 8', o:['4','6','8','16'], a:2, e:'4³ = 64. 64 ÷ 8 = 8.'},
+      {topic:'operations', q:'Evaluate: (6 + 2)² − 5 × 4', o:['34','40','44','48'], a:2, e:'(6+2)² = 64. 5×4 = 20. 64 − 20 = 44.'},
+      {topic:'statistics', q:'A soldier\'s five PT test scores are 82, 88, 91, 79, and 85. What is the median score?', o:['82','84','85','88'], a:2, e:'Sorted: 79, 82, 85, 88, 91. The middle value is 85.'},
+      {topic:'statistics', q:'What is the mode of the data set {14, 16, 14, 18, 20, 14, 16}?', o:['14','16','18','20'], a:0, e:'14 appears three times, more than any other value, so it\'s the mode.'},
+      {topic:'statistics', q:'A unit\'s average PT score is 80 across 5 soldiers. If one soldier who scored 60 is removed, what is the new average for the remaining 4 soldiers?', o:['82','83','84','85'], a:3, e:'Total = 80×5 = 400. Remove the 60: 400−60 = 340. New average = 340÷4 = 85.'},
+      {topic:'statistics', q:'What is the range of the data set {45, 62, 38, 71, 55}?', o:['26','29','33','36'], a:2, e:'Range = max − min = 71 − 38 = 33.'},
+      {topic:'geometry', q:'A rectangular obstacle course is 120 feet long and 80 feet wide. What is the total distance around the perimeter?', o:['350','380','400','420'], a:2, e:'Perimeter = 2 × (length + width) = 2 × (120+80) = 400 feet.'},
+      {topic:'geometry', q:'A circular parade ground has a radius of 21 feet. Using π ≈ 22/7, what is its approximate circumference?', o:['122','126','132','138'], a:2, e:'C = 2πr = 2 × (22/7) × 21 = 2 × 66 = 132 feet.'},
+      {topic:'geometry', q:'A triangular flag has a base of 18 inches and a height of 10 inches. What is its area?', o:['80','85','90','95'], a:2, e:'Area = ½ × base × height = ½ × 18 × 10 = 90 square inches.'},
+      {topic:'geometry', q:'A storage container is a rectangular box 6 feet long, 4 feet wide, and 3 feet tall. What is its volume?', o:['60','66','72','78'], a:2, e:'Volume = length × width × height = 6 × 4 × 3 = 72 cubic feet.'},
+      {topic:'geometry', q:'A square training mat has an area of 144 square feet. What is the length of one side?', o:['10','11','12','13'], a:2, e:'Side = √144 = 12 feet.'},
+      {topic:'geometry', q:'A rectangular field is twice as long as it is wide. If its width is 40 yards, what is its area?', o:['2,800','3,000','3,200','3,400'], a:2, e:'Length = 2 × 40 = 80 yards. Area = 80 × 40 = 3,200 square yards.'},
+      {topic:'geometry', q:'A circular helicopter landing pad has a diameter of 30 feet. What is its approximate area (use π ≈ 3.14)?', o:['675.5','690','706.5','720'], a:2, e:'Radius = 15 feet. Area = πr² = 3.14 × 225 = 706.5 square feet.'},
+      {topic:'geometry', q:'A ramp forms a right triangle with the ground: it rises 6 feet over a horizontal distance of 8 feet. How long is the ramp itself (the hypotenuse)?', o:['9','10','11','12'], a:1, e:'By the Pythagorean theorem: √(6² + 8²) = √(36+64) = √100 = 10 feet.'},
+      {topic:'geometry', q:'A rectangular tent floor measures 10 feet by 12 feet. A second tent has double the floor area but the same 10-foot width. How long is the second tent?', o:['20','22','24','26'], a:2, e:'Original area = 10×12 = 120 sq ft. Double = 240 sq ft. Length = 240 ÷ 10 = 24 feet.'}
     ]},
   { key:'WK', name:'Word Knowledge', icon:'📖', afqt:true, gt:true, blurb:'Vocabulary — pick the closest synonym.',
     study:{
@@ -1022,10 +1094,25 @@ function renderStudyDomain(key) {
         ${sec.items && sec.items.length ? `<ul>${sec.items.map(it => `<li>${it}</li>`).join('')}</ul>` : ''}
       </div>
     `).join('')}
+    ${s.topics ? `
+    <div class="card">
+      <h3>Practice by Topic</h3>
+      <p style="font-size:0.78rem;color:var(--text-light);margin-bottom:10px;">Jump straight into a specific category instead of the whole subtest.</p>
+      <div class="count-btn-row">
+        ${Object.keys(s.topics).map(tKey => `<button class="count-btn" onclick="jumpToTopicPractice('${key}', '${tKey}')">${s.topics[tKey]} (${s.questions.filter(q => q.topic === tKey).length})</button>`).join('')}
+      </div>
+    </div>` : ''}
     <div class="card" style="text-align:center;">
       <button class="btn btn-primary" onclick="show('practice'); renderPracticeSetup('${key}');">Practice ${s.name} Questions →</button>
     </div>
   `;
+}
+
+function jumpToTopicPractice(domainKey, topicKey) {
+  practiceSetupDomain = domainKey;
+  practiceSetupTopic = topicKey;
+  show('practice');
+  renderPracticeSetup();
 }
 
 /* ---------- PRACTICE QUIZ ---------- */
@@ -1036,13 +1123,16 @@ let practiceRevealed = []; // true if the user asked to see the walkthrough inst
 let practiceConfidence = []; // 'confident' | 'unsure' | 'guess' | null, set after answering
 let practiceIndex = 0;
 let practiceSetupDomain = null;
+let practiceSetupTopic = null;
 
-function getDomainPool(key) {
+function getDomainPool(key, topic) {
   if (key === 'GT-MIXED') {
     return SECTIONS.filter(s => s.gt).flatMap(s => s.questions.map(q => ({ sectionKey: s.key, sectionName: s.name, ...q })));
   }
   const s = SECTIONS.find(x => x.key === key);
-  return s.questions.map(q => ({ sectionKey: s.key, sectionName: s.name, ...q }));
+  let qs = s.questions;
+  if (topic && topic !== 'all') qs = qs.filter(q => q.topic === topic);
+  return qs.map(q => ({ sectionKey: s.key, sectionName: s.name, ...q }));
 }
 
 function shuffle(arr) {
@@ -1078,15 +1168,32 @@ function renderPracticeSetup(preselect) {
       <span class="tag tag-gt">GT</span>
     </div>`;
 
+  let topicHtml = '';
   let countHtml = '';
   if (practiceSetupDomain) {
-    const total = practiceSetupDomain === 'GT-MIXED' ? gtMixedTotal : SECTIONS.find(s => s.key === practiceSetupDomain).questions.length;
+    const domainObj = practiceSetupDomain === 'GT-MIXED' ? null : SECTIONS.find(s => s.key === practiceSetupDomain);
+    if (domainObj && domainObj.topics) {
+      const topicCounts = Object.keys(domainObj.topics).map(tKey => ({
+        key: tKey, label: domainObj.topics[tKey], count: domainObj.questions.filter(q => q.topic === tKey).length
+      }));
+      const allSelected = !practiceSetupTopic || practiceSetupTopic === 'all';
+      topicHtml = `
+        <div class="card">
+          <h3>Focus on a specific topic? (optional)</h3>
+          <div class="count-btn-row">
+            <button class="count-btn ${allSelected ? 'selected' : ''}" onclick="selectPracticeTopic('all')">All Topics (${domainObj.questions.length})</button>
+            ${topicCounts.map(t => `<button class="count-btn ${practiceSetupTopic === t.key ? 'selected' : ''}" onclick="selectPracticeTopic('${t.key}')">${t.label} (${t.count})</button>`).join('')}
+          </div>
+        </div>`;
+    }
+    const total = practiceSetupDomain === 'GT-MIXED' ? gtMixedTotal : getDomainPool(practiceSetupDomain, practiceSetupTopic).length;
     const options = [...new Set([5, 10, 15, total].filter(n => n <= total))];
+    const topicArg = practiceSetupDomain === 'GT-MIXED' ? 'null' : `'${practiceSetupTopic || 'all'}'`;
     countHtml = `
       <div class="card">
         <h3>How many questions?</h3>
         <div class="count-btn-row">
-          ${options.map(n => `<button class="count-btn" onclick="startPractice('${practiceSetupDomain}', ${n})">${n === total ? 'All ' + n : n}</button>`).join('')}
+          ${options.map(n => `<button class="count-btn" onclick="startPractice('${practiceSetupDomain}', ${n}, ${topicArg})">${n === total ? 'All ' + n : n}</button>`).join('')}
         </div>
       </div>`;
   }
@@ -1099,24 +1206,33 @@ function renderPracticeSetup(preselect) {
     <div class="domain-grid">${mixedCardHtml}${gtDomains.map(cardHtml).join('')}</div>
     <div class="study-group-title">Also Covered (AFQT &amp; Enlisted Job Options)</div>
     <div class="domain-grid">${otherDomains.map(cardHtml).join('')}</div>
+    ${topicHtml}
     ${countHtml}
   `;
 }
 
 function selectPracticeDomain(key) {
   practiceSetupDomain = key;
+  practiceSetupTopic = null;
   renderPracticeSetup();
 }
 
-function startPractice(domainKey, count) {
-  practiceQuiz = shuffle(getDomainPool(domainKey)).slice(0, count);
+function selectPracticeTopic(topicKey) {
+  practiceSetupTopic = topicKey;
+  renderPracticeSetup();
+}
+
+function startPractice(domainKey, count, topic) {
+  practiceQuiz = shuffle(getDomainPool(domainKey, topic)).slice(0, count);
   practiceAnswers = new Array(practiceQuiz.length).fill(-1);
   practiceRevealed = new Array(practiceQuiz.length).fill(false);
   practiceConfidence = new Array(practiceQuiz.length).fill(null);
   practiceIndex = 0;
   document.getElementById('practiceBackBtn').classList.remove('hidden');
-  const label = domainKey === 'GT-MIXED' ? 'GT Mixed Practice' : SECTIONS.find(s => s.key === domainKey).name;
-  document.getElementById('practiceTitle').textContent = `Practice: ${label}`;
+  const domainObj = domainKey === 'GT-MIXED' ? null : SECTIONS.find(s => s.key === domainKey);
+  const label = domainKey === 'GT-MIXED' ? 'GT Mixed Practice' : domainObj.name;
+  const topicLabel = domainObj && domainObj.topics && topic && topic !== 'all' ? ` — ${domainObj.topics[topic]}` : '';
+  document.getElementById('practiceTitle').textContent = `Practice: ${label}${topicLabel}`;
   renderPracticeQuestion();
 }
 
