@@ -174,6 +174,22 @@ body.dark .study-section-block h4 { color: var(--orange-light); }
 .activity-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
 .activity-row:last-child { border-bottom: none; }
 
+/* audio vocab drill */
+.vocab-warning { border: 1px solid var(--red); background: var(--red-bg); }
+.vocab-warning h3 { color: var(--red); }
+.vocab-player { text-align: center; padding: 30px 20px; }
+.vocab-status { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; min-height: 1.4em; }
+body.dark .vocab-status { color: var(--orange-light); }
+.vocab-status.speaking { color: var(--orange); }
+.vocab-status.thinking { color: var(--teal); }
+.vocab-status.answer { color: var(--green); }
+.vocab-word-display { font-size: 1.6rem; font-weight: 800; margin: 14px 0; color: var(--text); min-height: 1.3em; }
+.vocab-answer-display { font-size: 1rem; color: var(--text-light); min-height: 1.3em; margin-bottom: 10px; }
+.vocab-progress-text { font-size: 0.8rem; color: var(--text-light); margin-bottom: 20px; }
+.vocab-big-btn { width: 100%; max-width: 320px; padding: 22px; font-size: 1.2rem; border-radius: 14px; margin: 0 auto 14px; display: block; }
+.vocab-pulse { animation: vocabPulse 1.4s ease-in-out infinite; }
+@keyframes vocabPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
 /* GT realistic test */
 .gt-timer { font-size: 1.3rem; font-weight: 800; color: var(--navy); white-space: nowrap; min-width: 60px; text-align: right; }
 body.dark .gt-timer { color: var(--orange-light); }
@@ -198,6 +214,7 @@ body.dark .gt-timer { color: var(--orange-light); }
     <div class="nav-section-title">Study</div>
     <button class="nav-link" data-target="study">Study Guide</button>
     <button class="nav-link" data-target="practice">Practice Quiz</button>
+    <button class="nav-link" data-target="vocabaudio">🎧 Audio Vocab Drill</button>
   </div>
   <div class="nav-section">
     <div class="nav-section-title">Assessment</div>
@@ -318,6 +335,12 @@ body.dark .gt-timer { color: var(--orange-light); }
   <div class="section" id="sec-progress">
     <div class="topbar"><h2>My Progress</h2></div>
     <div id="progressContent"></div>
+  </div>
+
+  <!-- AUDIO VOCAB DRILL (hands-free, listen-and-practice) -->
+  <div class="section" id="sec-vocabaudio">
+    <div class="topbar"><h2>🎧 Audio Vocab Drill</h2></div>
+    <div id="vocabAudioContent"></div>
   </div>
 
   <!-- GT STUDY GUIDE (combined AR+WK+PC) -->
@@ -912,6 +935,7 @@ document.querySelectorAll('.nav-link[data-target]').forEach(l => l.addEventListe
   else if (l.dataset.target === 'study') { show('study'); renderStudyHome(); }
   else if (l.dataset.target === 'practice') { show('practice'); renderPracticeSetup(); }
   else if (l.dataset.target === 'progress') { show('progress'); renderProgress(); }
+  else if (l.dataset.target === 'vocabaudio') { show('vocabaudio'); renderVocabAudioSetup(); }
   else if (l.dataset.target === 'gtstudy') { show('gtstudy'); renderGTStudyGuide(); }
   else if (l.dataset.target === 'gttest') { show('gttest'); renderGTSetup(); }
   else show(l.dataset.target);
@@ -1807,6 +1831,175 @@ function renderGTReview(filter) {
 function exitGTTest() {
   clearGTTimer();
   show('dashboard');
+}
+
+/* ---------- AUDIO VOCAB DRILL (hands-free listen-and-practice) ---------- */
+
+let vocabQueue = [];
+let vocabIndex = 0;
+let vocabPlaying = false;
+let vocabThinkSeconds = 5;
+let vocabRate = 0.95;
+let vocabLoopContinuously = true;
+let vocabTimeoutHandle = null;
+const vocabSupported = typeof window !== 'undefined' && 'speechSynthesis' in window;
+
+function renderVocabAudioSetup() {
+  clearVocabTimers();
+  if (!vocabSupported) {
+    document.getElementById('vocabAudioContent').innerHTML = `
+      <div class="card vocab-warning">
+        <h3>Not Available on This Browser</h3>
+        <p>Your browser doesn't support speech synthesis, so this feature can't run here. It generally works in Chrome, Safari, and Edge on both desktop and mobile.</p>
+      </div>`;
+    return;
+  }
+  document.getElementById('vocabAudioContent').innerHTML = `
+    <div class="card vocab-warning">
+      <h3>⚠️ Use This Safely</h3>
+      <p>This reads Word Knowledge questions and answers out loud so you can drill vocab hands-free. Start it <strong>before you start driving</strong>, mount your phone, and don't touch it while the vehicle is moving — treat it like a podcast, not something you interact with mid-drive. Screen locking may stop playback on some phones, so keep the screen on and the app in the foreground.</p>
+    </div>
+    <div class="card">
+      <h3>🎧 Word Knowledge — Audio Drill</h3>
+      <p>Plays a word (or a sentence using it), pauses so you can think of the answer out loud, then speaks the correct answer and explanation before automatically moving to the next one. Draws from all ${SECTIONS.find(s=>s.key==='WK').questions.length} Word Knowledge questions, shuffled.</p>
+      <h4 style="margin-top:16px;">Think time before the answer</h4>
+      <div class="count-btn-row">
+        ${[3,5,8,12].map(s => `<button class="count-btn ${vocabThinkSeconds===s?'selected':''}" onclick="setVocabThink(${s})">${s} sec</button>`).join('')}
+      </div>
+      <h4 style="margin-top:16px;">Speech speed</h4>
+      <div class="count-btn-row">
+        ${[{v:0.8,l:'Slower'},{v:0.95,l:'Normal'},{v:1.15,l:'Faster'}].map(r => `<button class="count-btn ${vocabRate===r.v?'selected':''}" onclick="setVocabRate(${r.v})">${r.l}</button>`).join('')}
+      </div>
+      <h4 style="margin-top:16px;">
+        <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;cursor:pointer;">
+          <input type="checkbox" id="vocabLoopToggle" ${vocabLoopContinuously?'checked':''} onchange="vocabLoopContinuously=this.checked" style="width:16px;height:16px;">
+          Loop continuously (keeps reshuffling and playing until you stop it — good for a long drive)
+        </label>
+      </h4>
+    </div>
+    <div class="card" style="text-align:center;">
+      <button class="btn btn-primary vocab-big-btn" onclick="startVocabAudio()">▶ Start Audio Practice</button>
+    </div>
+  `;
+}
+
+function setVocabThink(s) { vocabThinkSeconds = s; renderVocabAudioSetup(); }
+function setVocabRate(r) { vocabRate = r; renderVocabAudioSetup(); }
+
+function startVocabAudio() {
+  vocabQueue = shuffle(SECTIONS.find(s => s.key === 'WK').questions);
+  vocabIndex = 0;
+  vocabPlaying = true;
+  renderVocabPlayer();
+  speakCurrentVocabItem();
+}
+
+function renderVocabPlayer() {
+  document.getElementById('vocabAudioContent').innerHTML = `
+    <div class="card vocab-player">
+      <div class="vocab-status" id="vocabStatus">Starting…</div>
+      <div class="vocab-word-display" id="vocabWordDisplay"></div>
+      <div class="vocab-answer-display" id="vocabAnswerDisplay"></div>
+      <div class="vocab-progress-text" id="vocabProgressText"></div>
+      <button class="btn btn-primary vocab-big-btn" id="vocabPauseBtn" onclick="toggleVocabPause()">⏸ Pause</button>
+      <button class="btn btn-outline" onclick="stopVocabAudio()">⏹ Stop &amp; Back to Setup</button>
+    </div>
+  `;
+}
+
+function speak(text, onEnd) {
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.rate = vocabRate;
+  u.onend = onEnd;
+  u.onerror = onEnd;
+  speechSynthesis.speak(u);
+}
+
+function speakCurrentVocabItem() {
+  if (!vocabPlaying) return;
+  if (vocabIndex >= vocabQueue.length) {
+    if (vocabLoopContinuously) {
+      vocabQueue = shuffle(vocabQueue);
+      vocabIndex = 0;
+    } else {
+      finishVocabAudio();
+      return;
+    }
+  }
+  const item = vocabQueue[vocabIndex];
+  const statusEl = document.getElementById('vocabStatus');
+  const wordEl = document.getElementById('vocabWordDisplay');
+  const answerEl = document.getElementById('vocabAnswerDisplay');
+  const progressEl = document.getElementById('vocabProgressText');
+  if (!statusEl) return; // player no longer on screen (user navigated away)
+
+  progressEl.textContent = `Word ${vocabIndex + 1} of ${vocabQueue.length}${vocabLoopContinuously ? ' (looping)' : ''}`;
+  statusEl.textContent = '🔊 Speaking…';
+  statusEl.className = 'vocab-status speaking vocab-pulse';
+  wordEl.textContent = item.q;
+  answerEl.textContent = '';
+
+  const spokenPrompt = item.q.replace(/"/g, '');
+  speak(spokenPrompt, () => {
+    if (!vocabPlaying) return;
+    statusEl.textContent = `🤔 Think about it… (${vocabThinkSeconds}s)`;
+    statusEl.className = 'vocab-status thinking vocab-pulse';
+    vocabTimeoutHandle = setTimeout(() => {
+      if (!vocabPlaying) return;
+      statusEl.textContent = '✅ Answer';
+      statusEl.className = 'vocab-status answer';
+      answerEl.textContent = `${item.o[item.a]} — ${item.e}`;
+      const spokenAnswer = `The answer is: ${item.o[item.a]}. ${item.e}`;
+      speak(spokenAnswer, () => {
+        if (!vocabPlaying) return;
+        vocabTimeoutHandle = setTimeout(() => {
+          vocabIndex++;
+          speakCurrentVocabItem();
+        }, 1800);
+      });
+    }, vocabThinkSeconds * 1000);
+  });
+}
+
+function toggleVocabPause() {
+  const btn = document.getElementById('vocabPauseBtn');
+  const statusEl = document.getElementById('vocabStatus');
+  if (vocabPlaying) {
+    vocabPlaying = false;
+    clearVocabTimers();
+    speechSynthesis.cancel();
+    if (btn) btn.textContent = '▶ Resume';
+    if (statusEl) { statusEl.textContent = '⏸ Paused'; statusEl.className = 'vocab-status'; }
+  } else {
+    vocabPlaying = true;
+    if (btn) btn.textContent = '⏸ Pause';
+    speakCurrentVocabItem(); // re-speaks the current word from the start — simpler and more reliable than native resume
+  }
+}
+
+function stopVocabAudio() {
+  vocabPlaying = false;
+  clearVocabTimers();
+  speechSynthesis.cancel();
+  renderVocabAudioSetup();
+}
+
+function finishVocabAudio() {
+  vocabPlaying = false;
+  clearVocabTimers();
+  document.getElementById('vocabAudioContent').innerHTML = `
+    <div class="card" style="text-align:center;">
+      <h3>Session Complete</h3>
+      <p>You went through all ${vocabQueue.length} Word Knowledge questions.</p>
+      <button class="btn btn-primary vocab-big-btn" onclick="startVocabAudio()">▶ Start Another Round</button>
+      <button class="btn btn-outline" onclick="renderVocabAudioSetup()">Back to Setup</button>
+    </div>
+  `;
+}
+
+function clearVocabTimers() {
+  if (vocabTimeoutHandle) { clearTimeout(vocabTimeoutHandle); vocabTimeoutHandle = null; }
 }
 </script>
 </body>
